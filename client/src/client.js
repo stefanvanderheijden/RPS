@@ -1,8 +1,3 @@
-//clearing the next line makes the program work??
-
-
-
-
 const writeEvent = (text) => {
     // <ul> element
     const parent = document.querySelector('#events');
@@ -13,10 +8,16 @@ const writeEvent = (text) => {
 
     parent.appendChild(el);
 
+    parent.scrollTop = parent.scrollHeight;
+
 };
 
+const scoring = (scoretext) => {
+    document.getElementById('score').innerHTML = scoretext
+}
+
 const addButtonListeners = () => {
-    ['rock','paper','sciccors'].forEach((id) => {
+    ['rock','paper','scissors'].forEach((id) => {
         const button = document.getElementById(id);
         button.addEventListener('click', () => {
             sock.emit('turn', id)
@@ -39,6 +40,10 @@ writeEvent('Welcome to chat verzonden vanuit de client js');
 
 const sock = io();
 sock.on('message', writeEvent);
+
+sock.on('score', (scores) => {
+    scoring(scores);
+})
 
 document
     .querySelector('#chat-form')

@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>RPS</title>
-        <link rel="stylesheet" href=styles/main.css>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="rps-wrapper">
-            <ul id="events"></ul>
-        <div class="button-wrapper">
-            <form id="chat-form">
-                <input id="chat">
-                <button id="say">Say</button>
-            </form>
-       
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="sciccors">Sciccors</button>
-                     
-            </div>
+  <head>
+    <title>RPS</title>
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body>
+    <div class="rps-wrapper">
+      	<h3 id="score">Score: </h3>
+      <ul id="events"></ul>
+      <div class="controls">
+        <div class="chat-wrapper">
+          <form id="chat-form">
+            <input id="chat" autocomplete="off" title="chat"/>
+            <button id="say">Say</button>
+          </form>
         </div>
-    
-    <script src="/socket.io/socket.io.js"></script>        
+
+        <div class="button-wrapper">
+          <button id="rock" class="turn">Rock</button>
+          <button id="paper" class="turn">Paper</button>
+          <button id="scissors" class="turn">Scissors</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>
-
-
-        
-    </body>
+  </body>
 </html>
