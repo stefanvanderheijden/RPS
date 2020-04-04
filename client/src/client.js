@@ -12,6 +12,30 @@ const writeEvent = (text) => {
 
 };
 
+//initialize canvas
+const canvas = document.getElementById("my-canvas")
+const context = canvas.getContext("2d")
+
+//testing from here
+const bg = new Image()
+const char = new Image()
+const longhair = new Image()
+const shocked = new Image()
+bg.src = "src/Room.png"
+char.src = "src/charbody.png"
+longhair.src = "src/charhairlong.png"
+shocked.src = "src/shocked.png"
+bg.onload = () => {
+  context.drawImage(bg, 0, 0)
+  context.drawImage(char, 16, 16)
+  context.drawImage(longhair, 16, 16)
+  context.drawImage(shocked, 16, 16)
+}
+
+//testing till here
+
+
+
 const scoring = (scoretext) => {
     document.getElementById('score').innerHTML = scoretext
 }
