@@ -1,8 +1,6 @@
 body {
     font-family: 'VT323', monospace;
     font-size: 8;
-    margin: 0;
-    padding: 0;
     background-color: bisque;
     font-size: 1.2rem;
     
@@ -12,13 +10,11 @@ body {
     font-family: 'VT323', monospace;
     outline: none;
     font-size: 1.0rem;
-    padding: 0 5px;
   }
-  
+
   button {
     font-family: 'VT323', monospace;
     font-size: 1rem;
-    padding: 3px 15px;
     color: white;
     line-height: 25px;
     background-color: #00bcd4;
@@ -30,7 +26,7 @@ body {
     outline: none;
     border-color: blue;
   }
-  
+
   button:hover {
       background-color: #79d7e4;
   }
@@ -40,23 +36,101 @@ body {
     background-color: bisque;
     box-shadow:none;
   }
-  
-  .canvas-wrapper {
+
+#topboxes{
+
+  width: 60%;
+  margin-left: auto; margin-right: auto;
+  min-width: 950px;
+}
+
+  #stage{
+    float: left;
+    width: 736px;
     margin-top: 20px;
-    margin-bottom: 0px;
-    text-align: center;
-   
+    position: relative;
+
+    /*
+    margin-left: auto; margin-right: auto;
+    */
+    overflow:hidden;
   }
 
-  canvas {
+  #bg-canvas {
     width: 736px;
     height: 672px;
     image-rendering: pixelated;
+
+    position: absolute; left: 100; top: 0; z-index: 0;
+  }
+  #char-canvas {
+    width: 736px;
+    height: 672px;
+    image-rendering: pixelated;
+    position: flex-start;
+    position: absolute; left: 0; top: 0; z-index: 1; 
+  }
+  #gadget-canvas {
+    width: 736px;
+    height: 672px;
+    image-rendering: pixelated;
+    position: absolute; left: 100; top: 0; z-index: 2;
+  }
+  #btext-canvas {
+    width: 736px;
+    height: 672px;
+    position: absolute; left: 50; top: 0; z-index: 3;
+  }
+
+  #rightbar {
+    position: relative;
+    padding-top: 20px;
+    margin-top: 20px;
+    margin-left: 750px;
+    flex-grow: 1;
+    height: 672px;
+ 
+    }
+
+  #events {
+    height: 85%;
+    padding: 20px 0px 0px 0px;
+    list-style: none;
+    border-bottom: 1px solid lightgrey;
+    overflow-y: scroll;
+  }
+
+  #events li {
+    padding: 0px 10px 0px 10px;
+  }
+  
+  .chat-wrapper {
+    bottom: 0px;
+    display: flex;
+    margin-left: auto; margin-right: auto;
+    justify-content: center;
+
+  }
+ 
+ 
+  .chat-wrapper form input {
+    flex: 1;
+    width: 200px;
+  }
+  
+  .chat-wrapper form button {
+    flex: 2;
+  }
+
+#bottomboxes {
+
+  width: 60%;
+  margin-left: auto; margin-right: auto;
+  min-width: 950px;
 }
 
   h3{
-    border-style: solid;
-    text-align: center;
+
     font-size: 2rem;
   }
 
@@ -65,53 +139,13 @@ body {
   }
   
   .rps-wrapper {
-    border-style: solid;
-    background-color: bisque;
-    width: 736px;
-    height: 300px;
-    max-height: 300px;
-    margin: 0px auto;
-    display: flex;
-    flex-direction: column;
 
+    background-color: bisque;
   }
   
-  #events {
-    flex-grow: 1;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid lightgrey;
-    overflow-y: scroll;
-  }
-  
-  #events li {
-    padding: 0px 0px 0px 0px;
-  }
-  
-  .chat-wrapper {
-    padding: 10px;
-    font-family: 'VT323', monospace;
-  }
-  
-  .chat-wrapper form {
-    display: flex;
-  }
-  
-  .chat-wrapper form input {
-    font-size: 1.0rem;
-    margin: 0 0px 0 0;
-    padding: 0 5px;
-    flex-grow: 1;
-  }
-  
-  .chat-wrapper form button {
-    width: 40px;
-  }
-  
+ 
   .button-wrapper {
     display: flex;
-    padding: 10px 10px;
     justify-content: space-evenly;
-    border-style: solid;
+
   }

@@ -5,22 +5,30 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body>
-    <div class="canvas-wrapper">
-      <canvas id="my-canvas" width="184" height="168"></canvas> 
-    </div>
-      
-    
-    <div class="rps-wrapper">
-      	<h3 id="score">Score: </h3>
+    <div id="topboxes">
+      <div id="stage">
+       <canvas id="bg-canvas" width="184" height="168"></canvas> 
+       <canvas id="char-canvas" width="184" height="168"></canvas> 
+       <canvas id="gadget-canvas" width="184" height="168"></canvas> 
+        <canvas id="text-canvas" width="736" height="672"></canvas> 
+      </div>
+      <div id="rightbar">
       <ul id="events"></ul>
-      <div class="controls">
+      
         <div class="chat-wrapper">
           <form id="chat-form">
             <input id="chat" autocomplete="off" title="chat"/>
             <button id="say">Say</button>
           </form>
+        
         </div>
-
+   </div>
+  </div>
+      
+  <div id="bottomboxes">
+    <div class="rps-wrapper">
+      	<h3 id="score">Score: </h3>
+        <div class="controls">
         <div class="button-wrapper">
           <button id="rock" class="turn">Rock</button>
           <button id="paper" class="turn">Paper</button>
@@ -28,8 +36,9 @@
         </div>
       </div>
     </div>
-
+  </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>
+    <script src="src/game_graphics.js"></script>
   </body>
 </html>
