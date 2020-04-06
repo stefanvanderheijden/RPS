@@ -17,8 +17,6 @@ const io = socketio(server);
 
 let waitingPlayer = null;
 
-
-
 io.on('connection', (sock) => {
 
     if (waitingPlayer) {
