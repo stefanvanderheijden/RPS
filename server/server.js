@@ -22,11 +22,8 @@ const io = socketio(server);
 
 let waitingPlayer = null;
 
-<<<<<<< HEAD
-=======
 
 // If connected you receive an event called connection, with the object sock
->>>>>>> feature/testumit
 io.on('connection', (sock) => {
 
     if (waitingPlayer) {
