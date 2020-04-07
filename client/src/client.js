@@ -1,8 +1,8 @@
 const writeEvent = (text) => {
-    // <ul> element
+    // <ul> element, defined in index.html. ul = unordered list
     const parent = document.querySelector('#events');
 
-    // <li> element
+    // <li> element, defined in index.html. li  => represents list item
     const el = document.createElement('li');
     el.innerHTML = text;
 
