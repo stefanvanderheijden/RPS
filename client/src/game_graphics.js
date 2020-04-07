@@ -17,11 +17,15 @@ const GadgetCanvas = HTMLGadgetCanvas.getContext("2d")
 const HTMLTextCanvas = document.getElementById("text-canvas")
 const TextCanvas = HTMLTextCanvas.getContext("2d")
 
+var VT323 = new FontFace("VT323", "https://fonts.googleapis.com/css2?family=VT323&display=swap");
+TextCanvas.font = "30px VT323";
+TextCanvas.textAlign = "center";
 
 class CreatePlayer {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+        this.name = "Name";
     }
 }
 
@@ -40,32 +44,42 @@ P8 = new CreatePlayer(56,112);
 P9 = new CreatePlayer(16,112);
 P10 = new CreatePlayer(16,64);
 
-//testing from here
-//const bg = new Image()
-//const char = new Image()
-//const longhair = new Image()
-//const shocked = new Image()
+const Players = [P1,P2,P3,P4,P5,P6,P7,P8,P9,P10];
 
+//load background
 var background = new Image();
 background.src = "src/IMG/Room.png";
 
+//load basic character
 var char = new Image();
 char.src = "src/IMG/charbody.png";
 
+//load long hair image
 var longhair = new Image();
 longhair.src = "src/IMG/charhairlong.png";
 
+//load short hair image
 var shorthair = new Image();
-longhair.src = "src/IMG/charhairlong.png";
+shorthair.src = "src/IMG/charhairshort.png";
 
+//load shocked emotion
 var shocked = new Image();
 shocked.src = "src/IMG/shocked.png";
 
-window.onload = function() {
-    BGCanvas.drawImage(background, 0, 0);
-    CharCanvas.drawImage(char, P1.x, P1.y);
-    GadgetCanvas.drawImage(longhair, 16, 16);
-    GadgetCanvas.drawImage(shocked, 16, 16);
-}
+//load excited emotion
+var excited = new Image();
+excited.src = "src/IMG/excited.png";
 
-//testing till here
+window.onload = function() {
+
+    Players.forEach(player => {
+    console.log("hallo");
+    CharCanvas.drawImage(char, player.x, player.y)
+    GadgetCanvas.drawImage(shorthair, player.x, player.y)
+    GadgetCanvas.drawImage(excited, player.x, player.y)
+    TextCanvas.fillText(player.name, 4*(player.x+15), 4*(player.y+36));
+    });
+
+    BGCanvas.drawImage(background, 0, 0);
+   
+}

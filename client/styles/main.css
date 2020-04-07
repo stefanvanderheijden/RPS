@@ -5,6 +5,7 @@ body {
     font-size: 10;
     background-color: bisque;
     font-size: 1.5rem;
+
     
   }
   
@@ -51,11 +52,6 @@ body {
     width: 736px;
     margin-top: 20px;
     position: relative;
-
-    /*
-    margin-left: auto; margin-right: auto;
-    */
-    overflow:hidden;
   }
 
   #bg-canvas {
@@ -63,7 +59,7 @@ body {
     height: 672px;
     image-rendering: pixelated;
 
-    position: absolute; left: 100; top: 0; z-index: 0;
+    position: absolute; left: 0; top: 0; z-index: 0;
   }
   #char-canvas {
     width: 736px;
@@ -76,12 +72,14 @@ body {
     width: 736px;
     height: 672px;
     image-rendering: pixelated;
-    position: absolute; left: 100; top: 0; z-index: 2;
+    position: absolute; left: 0; top: 0; z-index: 2;
   }
-  #btext-canvas {
-    width: 736px;
-    height: 672px;
-    position: absolute; left: 50; top: 0; z-index: 3;
+  #text-canvas {
+
+
+    image-rendering: pixelated;
+    position: absolute; left: 0; top: 0; z-index: 10;
+
   }
 
   #rightbar {
