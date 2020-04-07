@@ -22,13 +22,7 @@ io.on('connection', (sock) => {
     if (waitingPlayer) {
         //start a game
         
-        new RpsGame(waitingPlayer,sock);
-
-        // Onderstaande regels zijn samengevoegd in daaronderstaande array functie
-        //sock.emit('message', 'Game Starts!');
-        //waintingPlayer.emit('message', 'Game Starts!');
-
-        
+        new RpsGame(waitingPlayer,sock);       
         waitingPlayer = null;
     } else {
         waitingPlayer = sock;
