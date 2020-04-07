@@ -22,11 +22,33 @@ const io = socketio(server);
 
 let waitingPlayer = null;
 
+// Define player array, must be filled in connection function
+let playerArray = [];
 
 // If connected you receive an event called connection, with the object sock
 // TODO: Player that enters the game at its name to array
 io.on('connection', (sock) => {
 
+    sock.on('playername', (personName) => {
+            // Send to general chat
+            io.emit('message', personName+' has entered the game');
+            io.emit('message', sock.id)
+            var clientIp = sock.request.connection.remoteAddress;
+            io.emit('message','New connection from ' + clientIp);
+            // Append to player array
+            playerArray.push(personName);
+        });
+
+    // Displayer all players in chat, redundant function
+    playerArray.forEach((person) => {
+        io.emit('message',person+'is a player');
+    });
+
+    // if (playerArray.length == 10 ) {
+    //     // Start a game   
+    // }
+
+    // Keep this here for test javascript
     if (waitingPlayer) {
         //start a game
         
@@ -36,6 +58,7 @@ io.on('connection', (sock) => {
         waitingPlayer = sock;
         waitingPlayer.emit('message', 'waiting for an opponent');
     }
+
 
     sock.on('message', (text) => {
     //io.emit zend data naar alle verbonden sockets
