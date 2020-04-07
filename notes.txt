@@ -6,4 +6,4 @@ Create object of class (to make): player IF name doesn't exist in list
 if name already exists then: re-assign player to socket id (or something)
 create reset option for this list
 
-test
+# problem: what if game is already going? if players refreshes and name doesn't match: nothing happens?

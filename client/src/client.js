@@ -38,6 +38,12 @@ const onFormSubmitted = (e) => {
 
 writeEvent('Welcome to chat verzonden vanuit de client js');
 
+// When refreshing the page, a prompt appears to enter the player name
+// TODO: capital letters/spelling mistakes/etc
+// TODO: make separate function that automatically sends to server
+// TODO: send to server
+var person = prompt("Please enter your name:", "kksukkel");
+
 const sock = io();
 sock.on('message', writeEvent);
 
