@@ -1,1 +1,9 @@
-https://www.youtube.com/watch?v=nQC7VEIyQPI&t=358s 19.18
+https://www.youtube.com/watch?v=nQC7VEIyQPI&t=358s 1e.18
+
+Step 1:
+If someone enters page: enter name
+Create object of class (to make): player IF name doesn't exist in list
+if name already exists then: re-assign player to socket id (or something)
+create reset option for this list
+
+test
