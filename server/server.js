@@ -32,15 +32,11 @@ io.on('connection', (sock) => {
     sock.on('playername', (personName) => {
             // Send to general chat
             io.emit('message', personName+' has entered the game');
-            io.emit('message', sock.id)
-            var clientIp = sock.request.connection.remoteAddress;
-            io.emit('message','New connection from ' + clientIp);
             
             // If player array is empty, immediately add new player
             if (playerArray.length == 0){
                 // Create tmp player object and add to array
-                let player_tmp = new Player(personName,1)
-                player_tmp._updateSocket(sock);
+                let player_tmp = new Player(personName,1, sock)
                 playerArray.push(player_tmp);
 
             } else {
@@ -54,8 +50,7 @@ io.on('connection', (sock) => {
                     }
                     // If entered name is unique, create new player and add to array
                     if (playerExists == false){
-                        let player_tmp = new Player(personName,playerArray.length);
-                        player_tmp._updateSocket(sock);
+                        let player_tmp = new Player(personName,playerArray.length+1, sock);
                         playerArray.push(player_tmp);
                     }
 

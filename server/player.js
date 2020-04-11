@@ -1,13 +1,13 @@
 
 class Player {
-    constructor(name, seatnr){
+    constructor(name, seatnr,socket){
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._name  = name;
         this._seatnr = seatnr;
 
-        this._socket = null;
+        this._socket = socket;
 
-        // this._sendToPlayer(name + 'entered/reentered the game at seat' + seatnr);
+        this._sendToPlayer(name + ' entered the game at seat ' + seatnr);
 
         // Game related class variables
         this._identity = null;
