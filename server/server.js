@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 
+const Player = require('./player')
 const RpsGame = require('./rps-game')
 
 // Express library provides you with features for web and mobile application

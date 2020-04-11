@@ -110,5 +110,5 @@ class RpsGame {
 }
 
 
-
+// This file doesn't get called in html so export manually
 module.exports = RpsGame;

@@ -7,3 +7,8 @@ if name already exists then: re-assign player to socket id (or something)
 create reset option for this list
 TODO: define two states that indicate whether the game has begun or not
 # problem: what if game is already going? if players refreshes and name doesn't match: nothing happens?
+
+Step 2:
+Create game class, make rounds and voting system
+Create gamestate array containing roundnumber, vote count etc.
+Create class function in game class that updates player array
