@@ -36,6 +36,7 @@ io.on('connection', (sock) => {
             var clientIp = sock.request.connection.remoteAddress;
             io.emit('message','New connection from ' + clientIp);
             // Append to player array
+            // use socket reconnect function?
             playerArray.push(personName);
         });
 
