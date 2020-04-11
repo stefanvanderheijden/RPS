@@ -62,7 +62,7 @@ io.on('connection', (sock) => {
 
 
     sock.on('message', (text) => {
-    //io.emit zend data naar alle verbonden sockets
+    //io.emit sends data to all connected sockets
         io.emit('message', text);
     });
 });
