@@ -5,9 +5,9 @@ class Player {
         this._name  = name;
         this._seatnr = seatnr;
 
-        this._socketid = null;
+        this._socket = null;
 
-        this._sendToPlayers(name + 'entered/reentered the game at seat' + seatnr);
+        // this._sendToPlayer(name + 'entered/reentered the game at seat' + seatnr);
 
         // Game related class variables
         this._identity = null;
@@ -15,11 +15,8 @@ class Player {
 
     }
 
-    _sendToPlayers(msg) {
-       this._players.forEach((player) => {
-           player.emit('message', msg);
-       });
-
+    _sendToPlayer(msg) {
+       this._socket.emit('message', msg);
     }
 
     _assignRoleAndIdentity(identity,party) {
@@ -27,8 +24,8 @@ class Player {
         this._party = party;
     }
 
-    _updateSocketID(socketid){
-        this.socketid = socketid;
+    _updateSocket(socket){
+        this._socket = socket;
     }
 
 

@@ -36,15 +36,44 @@ io.on('connection', (sock) => {
             io.emit('message', sock.id)
             var clientIp = sock.request.connection.remoteAddress;
             io.emit('message','New connection from ' + clientIp);
+            
+            // here: create new player or update sockey
+            if (playerArray.length == 0){
+                let player_tmp = new Player(personName,1)
+                player_tmp._updateSocket(sock);
+                playerArray.push(player_tmp);
+
+            } else {
+                let playerExists = false;
+                playerArray.forEach((player) => {
+                    if (player._name == personName){
+                        player._updateSocket(sock);
+                        playerExists = true;
+                    }
+
+                    if (playerExists == false){
+                        let player_tmp = new Player(personName,playerArray.length);
+                        player_tmp._updateSocket(sock);
+                        playerArray.push(player_tmp);
+                    }
+
+                });
+            }
+
+            
+
+            io.emit('message',playerArray.length)
+            
+            
             // Append to player array
             // use socket reconnect function?
-            playerArray.push(personName);
+            
         });
 
     // Displayer all players in chat, redundant function
-    playerArray.forEach((person) => {
-        io.emit('message',person+'is a player');
-    });
+    // playerArray.forEach((player) => {
+    //     player._sendToPlayer('message',person+'is a player');
+    // });
 
     // if (playerArray.length == 10 ) {
     //     // Start a game   
