@@ -37,20 +37,23 @@ io.on('connection', (sock) => {
             var clientIp = sock.request.connection.remoteAddress;
             io.emit('message','New connection from ' + clientIp);
             
-            // here: create new player or update sockey
+            // If player array is empty, immediately add new player
             if (playerArray.length == 0){
+                // Create tmp player object and add to array
                 let player_tmp = new Player(personName,1)
                 player_tmp._updateSocket(sock);
                 playerArray.push(player_tmp);
 
             } else {
+                // If playerarray is nonzero length, first check if given name already exists
                 let playerExists = false;
                 playerArray.forEach((player) => {
+                    // If one of the names corresponds to the name field of the player, update socket
                     if (player._name == personName){
                         player._updateSocket(sock);
                         playerExists = true;
                     }
-
+                    // If entered name is unique, create new player and add to array
                     if (playerExists == false){
                         let player_tmp = new Player(personName,playerArray.length);
                         player_tmp._updateSocket(sock);
