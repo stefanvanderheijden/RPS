@@ -27,7 +27,6 @@ let waitingPlayer = null;
 let playerArray = [];
 
 // If connected you receive an event called connection, with the object sock
-// TODO: Player that enters the game at its name to array
 io.on('connection', (sock) => {
 
     sock.on('playername', (personName) => {
