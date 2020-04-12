@@ -56,10 +56,9 @@ io.on('connection', (sock) => {
 
                 });
             }
-
-            
-
-            io.emit('message',playerArray.length)
+       
+            //send the player array to all clients
+            io.emit('arrayUpdate',{array = playerArray});
             
             
             // Append to player array
@@ -77,15 +76,15 @@ io.on('connection', (sock) => {
     // }
 
     // Keep this here for test javascript
-    if (waitingPlayer) {
+    //if (waitingPlayer) {
         //start a game
         
-        new RpsGame(waitingPlayer,sock);       
-        waitingPlayer = null;
-    } else {
-        waitingPlayer = sock;
-        waitingPlayer.emit('message', 'waiting for an opponent');
-    }
+    //    new RpsGame(waitingPlayer,sock);       
+    //    waitingPlayer = null;
+    //} else {
+    //    waitingPlayer = sock;
+    //    waitingPlayer.emit('message', 'waiting for an opponent');
+    //}
 
 
     sock.on('message', (text) => {
