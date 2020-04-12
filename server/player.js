@@ -25,9 +25,6 @@ class Player {
     _updateSocket(socket){
         this._socket = socket;
     }
-
-
-
 }
 
 

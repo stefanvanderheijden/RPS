@@ -21,11 +21,11 @@ var VT323 = new FontFace("VT323", "https://fonts.googleapis.com/css2?family=VT32
 TextCanvas.font = "30px VT323";
 TextCanvas.textAlign = "center";
 
-class CreatePlayer {
+class Createseat {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.name = "Name";
+        this.name = " ";
     }
 }
 
@@ -33,18 +33,28 @@ function loadImage(url) {
     return new Promise(r => { let i = new Image(); i.onload = (() => r(i)); i.src = url; });
   }
 
-P1 = new CreatePlayer(16,16);
-P2 = new CreatePlayer(56,16);
-P3 = new CreatePlayer(96,16);
-P4 = new CreatePlayer(136,16);
-P5 = new CreatePlayer(136,64);
-P6 = new CreatePlayer(136,112);
-P7 = new CreatePlayer(96,112);
-P8 = new CreatePlayer(56,112);
-P9 = new CreatePlayer(16,112);
-P10 = new CreatePlayer(16,64);
 
-const Players = [P1,P2,P3,P4,P5,P6,P7,P8,P9,P10];
+
+//Creating all the seats
+S1 = new Createseat(16,16);
+S2 = new Createseat(56,16);
+S3 = new Createseat(96,16);
+S4 = new Createseat(136,16);
+S5 = new Createseat(136,64);
+S6 = new Createseat(136,112);
+S7 = new Createseat(96,112);
+S8 = new Createseat(56,112);
+S9 = new Createseat(16,112);
+S10 = new Createseat(16,64);
+
+const Seats = [S1,S2,S3,S4,S5,S6,S7,S8,S9,S10];
+
+function drawName(name,seatnumber) {
+    seat = Seats[seatnumber-1];
+    TextCanvas.fillText(name, 4*(seat.x+15), 4*(seat.y+36));
+    
+    //TextCanvas.fillText(name, 40, 40);
+    }
 
 //load background
 var background = new Image();
@@ -72,12 +82,11 @@ excited.src = "src/IMG/excited.png";
 
 window.onload = function() {
 
-    Players.forEach(player => {
-    console.log("hallo");
-    CharCanvas.drawImage(char, player.x, player.y)
-    GadgetCanvas.drawImage(shorthair, player.x, player.y)
-    GadgetCanvas.drawImage(excited, player.x, player.y)
-    TextCanvas.fillText(player.name, 4*(player.x+15), 4*(player.y+36));
+    Seats.forEach(seat => {
+    CharCanvas.drawImage(char, seat.x, seat.y)
+    GadgetCanvas.drawImage(shorthair, seat.x, seat.y)
+    GadgetCanvas.drawImage(excited, seat.x, seat.y)
+    //TextCanvas.fillText(seat.name, 4*(seat.x+15), 4*(seat.y+36));
     });
 
     BGCanvas.drawImage(background, 0, 0);
