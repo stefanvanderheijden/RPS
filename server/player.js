@@ -4,15 +4,13 @@ class Player {
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._name  = name;
         this._seatnr = seatnr;
-
         this._socket = socket;
 
-        this._sendToPlayer(name + ' entered the game at seat ' + seatnr);
+        this._sendToPlayer(name + ' takes seat ' + seatnr);
 
         // Game related class variables
         this._identity = null;
         this._party = null;
-
     }
 
     _sendToPlayer(msg) {
@@ -27,9 +25,6 @@ class Player {
     _updateSocket(socket){
         this._socket = socket;
     }
-
-
-
 }
 
 

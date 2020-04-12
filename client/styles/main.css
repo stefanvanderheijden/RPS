@@ -2,9 +2,8 @@
 
 body {
     font-family: 'VT323', monospace;
-    font-size: 10;
     background-color: bisque;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 
     
   }
@@ -129,12 +128,7 @@ body {
   min-width: 950px;
 }
 
-  h3{
-
-    font-size: 2rem;
-  }
-
-  button.turn:hover {
+   button.turn:hover {
     background-color: whitesmoke;
   }
   
