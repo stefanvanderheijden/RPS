@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 
 const Player = require('./player')
 const RpsGame = require('./rps-game')
+const SHGame = require('./SH-game-logic')
 
 // Express library provides you with features for web and mobile application
 // Create a listener
@@ -95,33 +96,18 @@ io.on('connection', (sock) => {
                 
             });
             
-            
+            if (playerArray.length == 3 ) {
+                io.emit('message','gamestrats');
+                game = new SHGame(playerArray); 
+            }
             // Append to player array
             // use socket reconnect function?
             
         });
 
 
+    
 
-    // Displayer all players in chat, redundant function
-    // playerArray.forEach((player) => {
-    //     player._sendToPlayer('message',person+'is a player');
-    // });
-
-    // if (playerArray.length == 10 ) {
-    //     // Start a game   
-    // }
-
-    // Keep this here for test javascript
-    //if (waitingPlayer) {
-        //start a game
-        
-    //    new RpsGame(waitingPlayer,sock);       
-    //    waitingPlayer = null;
-    //} else {
-    //    waitingPlayer = sock;
-    //    waitingPlayer.emit('message', 'waiting for an opponent');
-    //}
 
     sock.on('message', (text) => {
     //io.emit sends data to all connected sockets

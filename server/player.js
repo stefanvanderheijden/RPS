@@ -17,11 +17,19 @@ class Player {
        this._socket.emit('message', msg);
     }
 
-    _assignRoleAndIdentity(identity,party) {
+    _assignIdentity(identity) {
         this._identity = identity;
-        this._party = party;
+        // Base the party on the given ID
+        if (identity == 'Hitler' || identity == 'Fascist'){
+            this._party = 'Fascist';      
+        } else {
+            this._party = 'Liberal';
+        }
     }
 
+    _getParty(){
+        return this._party;
+    }
     _updateSocket(socket){
         this._socket = socket;
     }
