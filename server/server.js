@@ -58,9 +58,9 @@ io.on('connection', (sock) => {
             }
 
             
-
-            io.emit('message',playerArray.length)
-            
+        // Same??
+        io.emit('message',playerArray.length)
+        io.sockets.emit('message',' test')    
             
             // Append to player array
             // use socket reconnect function?
