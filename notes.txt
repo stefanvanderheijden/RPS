@@ -10,8 +10,11 @@ TODO: define two states that indicate whether the game has begun or not
 # solution: after every round recheck player array.
 
 Step 2:
-Create class function in player class that updates player array
+Create class function in player class that updates player array - done
 
 step 3: 
+Start game, choose hitler and party
+
+step 4:
 Create game class, make rounds and voting system
 Create gamestate array containing roundnumber, vote count etc.
