@@ -87,14 +87,7 @@ io.on('connection', (sock) => {
                 }
 
                 
-            }
-     
-            io.emit('message', 'The current players are sitting at the table:')
-            playerArray.forEach(player => {
-                 io.emit('message', player._name + ' at seat nr ' + player._seatnr);
-                
-            });
-            
+            }          
             
             // Append to player array
             // use socket reconnect function?
@@ -128,6 +121,9 @@ io.on('connection', (sock) => {
         io.emit('message', text);
     });
 
+    sock.on('vote', function(data)  {
+        io.emit('message',data.name + " has voted on seat " + data.vote);
+    });
 
    
 });
