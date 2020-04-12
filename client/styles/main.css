@@ -77,8 +77,12 @@ body {
 
 
     image-rendering: pixelated;
-    position: absolute; left: 0; top: 0; z-index: 10;
+    position: absolute; left: 0; top: 0; z-index: 3;
 
+  }
+
+  #clickimage {
+    position: absolute; left: 0; top: 0; z-index: 10;
   }
 
   #rightbar {

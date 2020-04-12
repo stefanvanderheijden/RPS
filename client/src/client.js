@@ -9,15 +9,6 @@ const writeEvent = (text) => {
 
 };
 
-const addButtonListeners = () => {
-    ['rock','paper','scissors'].forEach((id) => {
-        const button = document.getElementById(id);
-        button.addEventListener('click', () => {
-            sock.emit('turn', id)
-        });
-    });
-};
-
 const onFormSubmitted = (e) => {
     e.preventDefault();
     const input = document.querySelector('#chat');
@@ -25,6 +16,11 @@ const onFormSubmitted = (e) => {
     input.value = '';
     sock.emit('message', text);
     console.log('verzonden bericht');
+};
+
+function sendVote(areanumber) {
+    // emit to the server on which the client has clicked. Also send the client name
+    sock.emit("vote", {name: person, vote: areanumber});
 };
 
 // Create socket 
@@ -82,4 +78,20 @@ document
     .querySelector('#chat-form')
     .addEventListener('submit', onFormSubmitted);
 
-addButtonListeners();
+
+const areas = ["#p1area","#p2area","#p3area","#p4area","#p5area","#p6area","#p7area","#p8area","#p9area","#p10area"]
+
+areas.forEach((area) => {
+    
+    $(area).on("click", function(e){
+        // Prevent the default link to be opened for the area in the HTML
+        e.preventDefault();
+        // Get the areanumber by index of the array
+        areanumber = areas.indexOf(area)+1;
+        // Write to the console which you have clicked
+        writeEvent("You clicked on seat " + areanumber);
+        // call the function that sends the vote to the server
+        sendVote(areanumber);
+    });
+    
+});

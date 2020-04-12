@@ -81,7 +81,6 @@ var excited = new Image();
 excited.src = "src/IMG/excited.png";
 
 window.onload = function() {
-
     Seats.forEach(seat => {
     CharCanvas.drawImage(char, seat.x, seat.y)
     GadgetCanvas.drawImage(shorthair, seat.x, seat.y)

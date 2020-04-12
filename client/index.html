@@ -7,10 +7,26 @@
   <body>
     <div id="topboxes">
       <div id="stage" width="736px" height="672px">
+
         <canvas id="bg-canvas" width="184" height="168"></canvas> 
         <canvas id="char-canvas" width="184" height="168"></canvas> 
         <canvas id="gadget-canvas" width="184" height="168"></canvas> 
         <canvas id="text-canvas" width="736px" height="672px"></canvas> 
+        
+        <img id="clickimage" src ="src/IMG/Border.png" width="736px" height="672px" usemap="#clickarea">
+        
+        <map name="clickarea">
+          <area id="p1area" shape="rect" coords="64,64,192,224" alt="p1" href="1.htm">
+          <area id="p2area" shape="rect" coords="224,64,352,224" alt="p2" href="2.htm">
+          <area id="p3area" shape="rect" coords="384,64,512,224" alt="p3" href="3.htm">
+          <area id="p4area" shape="rect" coords="544,64,672,224" alt="p4" href="4.htm">
+          <area id="p5area" shape="rect" coords="544,256,672,416" alt="p5" href="5.htm">
+          <area id="p6area" shape="rect" coords="544,448,672,608" alt="p6" href="6.htm">
+          <area id="p7area" shape="rect" coords="384,448,512,608" alt="p7" href="7.htm">
+          <area id="p8area" shape="rect" coords="224,448,352,608" alt="p8" href="8.htm">
+          <area id="p9area" shape="rect" coords="64,448,192,608" alt="p9" href="9.htm">
+          <area id="p10area" shape="rect" coords="64,256,192,416" alt="p10" href="10.htm">
+        </map>
       </div>
       <div id="rightbar">
       <ul id="events"></ul>
@@ -24,18 +40,7 @@
         </div>
    </div>
   </div>
-      
-  <div id="bottomboxes">
-    <div class="rps-wrapper">
-      	<div class="controls">
-        <div class="button-wrapper">
-          <button id="rock" class="turn">Rock</button>
-          <button id="paper" class="turn">Paper</button>
-          <button id="scissors" class="turn">Scissors</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>
     <script src="src/game_graphics.js"></script>
