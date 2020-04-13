@@ -34,7 +34,7 @@ class SHGame {
             
             roledict.splice(randomNr, 1);
         });
-        
+        // line
         // SEND HERE PLAYER IDS OF OTHER FASCISTS TO CORRECT CLIENTS
 
     }
