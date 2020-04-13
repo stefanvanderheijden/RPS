@@ -9,13 +9,123 @@ body {
 
   }
   
-  input {
-    font-family: 'VT323', monospace;
-    outline: none;
-    font-size: 1.2rem;
+#topboxes{
+    border-color: blue;
+    border-style: dotted;
+    width: 70%;
+    margin-left: auto; margin-right: auto;
+    min-width: 950px;
+    margin-bottom: 20px;
+    margin-top:20px;
+    padding: 10px;
+    height: 700px;
   }
 
-  button {
+#stage{
+  border-color: red;
+  border-style: dotted;
+  float: left;
+  width: 736px;
+  height: 672px;
+  position: relative;
+  }
+
+#bg-canvas {
+  width: 736px;
+  height: 672px;
+  image-rendering: pixelated;
+  position: absolute; left: 0; top: 0; z-index: 0;
+  }
+
+#char-canvas {
+  width: 736px;
+  height: 672px;
+  image-rendering: pixelated;
+  position: flex-start;
+  position: absolute; left: 0; top: 0; z-index: 1; 
+  }
+
+#gadget-canvas {
+  width: 736px;
+  height: 672px;
+  image-rendering: pixelated;
+  position: absolute; left: 0; top: 0; z-index: 2;
+  }
+#text-canvas {
+  image-rendering: pixelated;
+  position: absolute; left: 0; top: 0; z-index: 3;
+  }
+
+#clickimage {
+  position: absolute; left: 0; top: 0; z-index: 10;
+  image-rendering: pixelated;
+  }
+
+#rightbar {
+  border-radius: 25px;
+  border-color: green;
+  border-style: dotted;
+  position: relative;
+  padding: 20px;
+  padding-bottom: 2px;;
+  margin-left: 770px;
+  flex-grow: 1;
+  height: 362px;
+  background-color: #faecd1;
+  width: 472px;
+  }
+
+#events {
+  height: 250px;
+  list-style: none;
+  border-bottom: 1px solid lightgrey;
+  overflow-y: scroll;
+  padding-left: 10px;
+  }
+
+#events li {
+  padding: 0px 10px 0px opx;
+  }
+
+.chat-wrapper {
+  border-color: orange;
+  border-style: dotted;
+  display: flex;
+  margin-left: 0px; margin-right: 0px;
+  justify-content: center;
+  margin-bottom: 100px;
+  }
+   
+.chat-wrapper form input {
+  flex: 1;
+  width: 200px;
+  }
+    
+.chat-wrapper form button {
+  flex: 2;
+  }
+
+#rightbottom {
+  margin-top: 416px;
+  width: 512px;
+  height: 256px;
+  position: absolute; left: 0; top: 0; z-index: 0;
+
+}
+
+#BGCards {
+  width: 512px;
+  height: 256px;
+  image-rendering: pixelated;
+}
+
+input {
+  font-family: 'VT323', monospace;
+  outline: none;
+  font-size: 1.2rem;
+  }
+
+button {
     font-family: 'VT323', monospace;
     font-size: 1.5rem;
     color: white;
@@ -30,116 +140,16 @@ body {
     border-color: blue;
   }
 
-  button:hover {
+button:hover {
       background-color: #79d7e4;
-  }
-  
-
-#topboxes{
-  border-color: blue;
-  border-style: dotted;
-  width: 70%;
-  margin-left: auto; margin-right: auto;
-  min-width: 950px;
-  margin-bottom: 20px;
-  margin-top:20px;
-  padding: 10px;
-  height: 700px;
-}
-
-  #stage{
-    border-color: red;
-    border-style: dotted;
-    float: left;
-    width: 736px;
-    height: 672px;
-    position: relative;
-  }
-
-  #bg-canvas {
-
-    width: 736px;
-    height: 672px;
-    image-rendering: pixelated;
-    position: absolute; left: 0; top: 0; z-index: 0;
-  }
-  #char-canvas {
-    width: 736px;
-    height: 672px;
-    image-rendering: pixelated;
-    position: flex-start;
-    position: absolute; left: 0; top: 0; z-index: 1; 
-  }
-  #gadget-canvas {
-    width: 736px;
-    height: 672px;
-    image-rendering: pixelated;
-    position: absolute; left: 0; top: 0; z-index: 2;
-  }
-  #text-canvas {
-    image-rendering: pixelated;
-    position: absolute; left: 0; top: 0; z-index: 3;
-
-  }
-
-  #clickimage {
-    position: absolute; left: 0; top: 0; z-index: 10;
-    image-rendering: pixelated;
-  }
-
-  #rightbar {
-    border-radius: 25px;
-    border-color: green;
-    border-style: dotted;
-    position: relative;
-    padding: 20px;
-    margin-left: 770px;
-    flex-grow: 1;
-    height: 332px;
-    background-color: #faecd1;
-    }
-
-  #events {
-  
-    height: 250px;
-    padding: 20px 0px 0px 0px;
-    list-style: none;
-    border-bottom: 1px solid lightgrey;
-    overflow-y: scroll;
-    padding-left: 10px;
-  }
-
-  #events li {
-    padding: 5px 10px 0px 10px;
-  }
-  
-  .chat-wrapper {
-    border-color: orange;
-    border-style: dotted;
-    bottom: 0px;
-    display: flex;
-    margin-left: auto; margin-right: auto;
-    justify-content: center;
-
-  }
- 
- 
-  .chat-wrapper form input {
-    flex: 1;
-    width: 200px;
-
-  }
-  
-  .chat-wrapper form button {
-    flex: 2;
-
   }
 
 #bottomboxes {
-
   width: 60%;
   margin-left: auto; margin-right: auto;
   min-width: 950px;
+  outline: none;
+  border-color: blue;
 }
 
    button.turn:hover {
