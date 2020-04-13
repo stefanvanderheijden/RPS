@@ -31,7 +31,7 @@ let leanPlayerArray = [];
 function UpdatePlayerArray(player) {
     playerArray.push(player);   
     // create a new lean player object (dictionary)
-    leanPlayer = {name : player._name, seatnr : player._seatnr, identity : player._identity, party : player._party};
+    leanPlayer = {name : player._name, seatnr : player._seatnr, identity : player._identity, party : player._party, emotion : 0};
     // add this lean player to the leanplayer array
     leanPlayerArray.push(leanPlayer);
     // send this lean player to all the clients (not the full array)
@@ -39,7 +39,7 @@ function UpdatePlayerArray(player) {
 }
 
 function SendFullPlayerArray(player) {
-    //send the full array to the new player, so he has all the info
+    //send the full array to the new play er, so he has all the info
     player._socket.emit("getPlayerArray",leanPlayerArray);
 }
 
@@ -110,6 +110,17 @@ io.on('connection', (sock) => {
 
     sock.on('vote', function(data)  {
         io.emit('message',data.name + " has voted on seat " + data.vote);
+    });
+
+    sock.on('emotionUpdate', function(data) {
+        io.emit('emotionUpdating', data);
+        // Update the lean player array
+        leanPlayerArray.forEach(leanPlayer => {
+            if (leanPlayer.seatnr == data.seatnr) {
+                leanPlayer.emotion = data.emotion;
+            }
+        });
+        
     });
 
    

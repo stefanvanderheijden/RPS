@@ -3,6 +3,7 @@
   <head>
     <title>RPS</title>
     <link rel="stylesheet" href="styles/main.css">
+
   </head>
   <body>
     <div id="topboxes">
@@ -36,14 +37,32 @@
             <input id="chat" autocomplete="off" title="chat"/>
             <button id="say">Say</button>
           </form>
-        
+          <div class="dropdown">
+
+            
+            <button class="dropbtn">I'm feeling...</button>
+            <div class="dropdown-content">
+              <a id="0" onclick="emotionSubmit(0)" href="#">Excited</a>
+              <a id="1" onclick="emotionSubmit(1)" href="#">Angry</a>
+              <a id="2" onclick="emotionSubmit(2)" href="#">Cool</a>
+              <a id="3" onclick="emotionSubmit(3)" href="#">Surprised</a>
+              <a id="4" onclick="emotionSubmit(4)" href="#">Suspicious</a>
+              <a id="5" onclick="emotionSubmit(5)" href="#">Shocked</a>
+              <a id="6" onclick="emotionSubmit(6)" href="#">Scared</a>
+              <a id="7" onclick="emotionSubmit(7)" href="#">Content</a>
+              <a id="8" onclick="emotionSubmit(8)" href="#">Sad</a>
+            </div>
+
+          </div>
+       
         </div>
    </div>
   </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="src/client.js"></script>
-    <script src="src/game_graphics.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/src/game_graphics.js"></script>
+  <script src="/src/client.js"></script>
 
   </body>
 </html>

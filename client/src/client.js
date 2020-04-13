@@ -1,3 +1,7 @@
+
+// Ik kreeg foutmeldingen totdat ik onderstaande regel commenteerde???
+//import { Socket } from "dgram";
+
 const writeEvent = (text) => {
     // <ul> element, defined in index.html. ul = unordered list
     const parent = document.querySelector('#events');
@@ -9,12 +13,22 @@ const writeEvent = (text) => {
 
 };
 
+// Create socket 
+const sock = io();
+
+var myseatnr = 0;
+
+function emotionSubmit(emotionindex) {
+    sock.emit('emotionUpdate', {emotion : emotionindex, seatnr : myseatnr});
+};
+
+
 const onFormSubmitted = (e) => {
     e.preventDefault();
     const input = document.querySelector('#chat');
     const text = input.value;
     input.value = '';
-    sock.emit('message', text);
+    sock.emit('message', person + ": " + text);
     console.log('verzonden bericht');
 };
 
@@ -23,8 +37,6 @@ function sendVote(areanumber) {
     sock.emit("vote", {name: person, vote: areanumber});
 };
 
-// Create socket 
-const sock = io();
 
 // Create local playerArray to use in graphics
 var localplayerArray = [];
@@ -53,9 +65,8 @@ sock.on('clientArrayUpdate', function(player) {
     localplayerArray.push(player);
     // draw the name of the newly added player on the canvas
     drawName(player.name,player.seatnr);
-    // call the draw function in game_graphics.js to draw all the names in player array
+    drawEmotion(player.emotion, player.seatnr);
     };
-
 })
 
 sock.on('getPlayerArray', function(playerarray) {
@@ -67,17 +78,29 @@ sock.on('getPlayerArray', function(playerarray) {
 sock.on("start", function(){
     //when the socket is first started, it should draw ALL names of the players
     localplayerArray.forEach((player) => {
-    drawName(player.name,player.seatnr);
-    console.log("drawing player "+ player.name);
-    started = true;
+        drawName(player.name,player.seatnr);
+        console.log("drawing player "+ player.name);
+        drawEmotion(player.emotion, player.seatnr);
+
+        // For the clients own name, also draw a border.
+        if (player.name == person) {
+            myseatnr = player.seatnr;
+            drawBorder(player.seatnr);
+            console.log("drawing border")
+        }
+
+        started = true;
     });
     });
 
+sock.on('emotionUpdating', function(data) {
+    drawEmotion(data.emotion, data.seatnr);
+});
+    
 
 document
     .querySelector('#chat-form')
     .addEventListener('submit', onFormSubmitted);
-
 
 const areas = ["#p1area","#p2area","#p3area","#p4area","#p5area","#p6area","#p7area","#p8area","#p9area","#p10area"]
 
