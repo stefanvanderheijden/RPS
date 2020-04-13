@@ -44,6 +44,7 @@ body {
   margin-bottom: 20px;
   margin-top:20px;
   padding: 10px;
+  height: 700px;
 }
 
   #stage{
@@ -94,13 +95,13 @@ body {
     padding: 20px;
     margin-left: 770px;
     flex-grow: 1;
-    height: 632px;
+    height: 332px;
     background-color: #faecd1;
     }
 
   #events {
   
-    height: 85%;
+    height: 250px;
     padding: 20px 0px 0px 0px;
     list-style: none;
     border-bottom: 1px solid lightgrey;
@@ -181,7 +182,6 @@ body {
   /* Dropdown Button */
   .dropbtn {
     font-family: 'VT323', monospace;
-    flex: 3;
     font-size: 1.5rem;
     color: white;
     line-height: 25px;
