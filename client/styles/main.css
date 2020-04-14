@@ -2,16 +2,11 @@
 
 body {
     font-family: 'VT323', monospace;
-    background-color: #928977;
+    background-color: #F0FFF0;
     font-size: 1.2rem;
-    border-style: dotted;
-    border-color: grey;
-
   }
   
 #topboxes{
-    border-color: blue;
-    border-style: dotted;
     width: 70%;
     margin-left: auto; margin-right: auto;
     min-width: 950px;
@@ -22,8 +17,6 @@ body {
   }
 
 #stage{
-  border-color: red;
-  border-style: dotted;
   float: left;
   width: 736px;
   height: 672px;
@@ -63,8 +56,6 @@ body {
 
 #rightbar {
   border-radius: 25px;
-  border-color: green;
-  border-style: dotted;
   position: relative;
   padding: 20px;
   padding-bottom: 2px;;
@@ -88,8 +79,6 @@ body {
   }
 
 .chat-wrapper {
-  border-color: orange;
-  border-style: dotted;
   display: flex;
   margin-left: 0px; margin-right: 0px;
   justify-content: center;
@@ -136,8 +125,6 @@ button {
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.12) 0 1px 6px, rgba(0, 0, 0, 0.12) 0 1px 4px;
     transition: all 150ms ease-in;
-    outline: none;
-    border-color: blue;
   }
 
 button:hover {

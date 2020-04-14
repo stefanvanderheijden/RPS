@@ -116,5 +116,40 @@ areas.forEach((area) => {
         // call the function that sends the vote to the server
         sendVote(areanumber);
     });
-    
-});
+    });
+
+$("#yesbutton").on("click", function(e) {
+    // Prevent the default link to be opened for the area in the HTML
+    e.preventDefault();
+    // Actions when clicked on the JAWOHL BUTTON
+    });
+
+$("#nobutton").on("click", function(e) {
+        // Prevent the default link to be opened for the area in the HTML
+        e.preventDefault();
+        // Actions when clicked on the NEIN BUTTON
+        });
+
+$("#cardsbutton").on("click", function(e) {
+    // Prevent the default link to be opened for the area in the HTML
+    e.preventDefault();
+    // Actions when clicked on the button below the cards
+    });
+
+$("#card1").on("click", function(e) {
+    // Prevent the default link to be opened for the area in the HTML
+    e.preventDefault();
+    // Actions when clicked on the FIRST CARD
+    });
+
+$("#card2").on("click", function(e) {
+    // Prevent the default link to be opened for the area in the HTML
+    e.preventDefault();
+    // Actions when clicked on the SECOND CARD
+    });
+
+$("#card3").on("click", function(e) {
+    // Prevent the default link to be opened for the area in the HTML
+    e.preventDefault();
+    // Actions when clicked on the THIRD CARD
+    });
