@@ -85,9 +85,7 @@ io.on('connection', (sock) => {
                     SendFullPlayerArray(player_tmp);
                     //Initiate the starting function for the new client
                     sock.emit("start");
-                }
-
-                
+                }               
             }
                 
             if (playerArray.length == 3 ) {
@@ -98,10 +96,6 @@ io.on('connection', (sock) => {
             // use socket reconnect function?
             
         });
-
-
-    
-
 
     sock.on('message', (text) => {
     //io.emit sends data to all connected sockets
@@ -122,8 +116,6 @@ io.on('connection', (sock) => {
         });
         
     });
-
-   
 });
 
 // Output error message if server crashes

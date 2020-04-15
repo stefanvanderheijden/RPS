@@ -17,9 +17,15 @@ const GadgetCanvas = HTMLGadgetCanvas.getContext("2d")
 const HTMLTextCanvas = document.getElementById("text-canvas")
 const TextCanvas = HTMLTextCanvas.getContext("2d")
 
+const HTMLCTextCanvas = document.getElementById("cards-text-canvas")
+const CTextCanvas = HTMLCTextCanvas.getContext("2d")
+
 var VT323 = new FontFace("VT323", "https://fonts.googleapis.com/css2?family=VT323&display=swap");
 TextCanvas.font = "30px VT323";
 TextCanvas.textAlign = "center";
+
+CTextCanvas.font = "30px VT323";
+CTextCanvas.textAlign = "center";
 
 class Createseat {
     constructor(x, y) {
@@ -126,3 +132,7 @@ window.onload = function() {
     BGCanvas.drawImage(background, 0, 0);
    
 }
+
+// Drawing the words on the YES and NO button
+
+CTextCanvas.fillText("TESTING", 130, 130);
