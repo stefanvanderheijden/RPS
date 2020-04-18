@@ -23,6 +23,8 @@ class SHGame {
 
     // This function assigns roles and ids to each player
     _initializeGame(playerarray, roledict){
+        var fascists = [];
+        var idmsgs = [];
         // Loop over each player
         playerarray.forEach((player) => {
             var randomNr = Math.floor(Math.random() * roledict.length);
@@ -32,10 +34,29 @@ class SHGame {
             player._sendToPlayer('Role: ' + roledict[randomNr])
             player._sendToPlayer('Party: ' + player._getParty())
             
+            // Store the fascists and create messages to announce them to co-players
+            if ((roledict[randomNr]=='Fascist') || (roledict[randomNr]=='Hitler')){
+                fascists.push(player)
+                idmsgs.push(player._getName() + " has the identity: " + roledict[randomNr]);
+            }
+
+            // Remove role from array
             roledict.splice(randomNr, 1);
+
+
         });
-        // line
-        // SEND HERE PLAYER IDS OF OTHER FASCISTS TO CORRECT CLIENTS
+
+        // Announce the ID's to the fascists
+        fascists.forEach((fascist) => {
+            // Check if the player is NOT hitler
+            if (fascist._getIdentity != 'Hitler'){
+                idmsgs.forEach((idmsg) => {
+                    fascist._sendToPlayer(idmsg);
+                });
+            }
+
+        });
+
 
     }
 

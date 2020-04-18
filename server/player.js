@@ -28,9 +28,18 @@ class Player {
         }
     }
 
+    _getName(){
+        return this._name;
+    }
+
     _getParty(){
         return this._party;
     }
+
+    _getIdentity(){
+        return this._identity;
+    }
+
     _updateSocket(socket){
         this._socket = socket;
     }
