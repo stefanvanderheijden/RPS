@@ -94,18 +94,45 @@ body {
   flex: 2;
   }
 
+#cardsstage{
+    float: left;
+    width: 512px;
+    height: 256px;
+    position: relative;
+    }
+
+#cards-gadget-canvas {
+  width: 512px;
+  height: 256px;
+  image-rendering: pixelated;
+  position: absolute; left: 0; top: 0; z-index: 1;
+  }
+
+#cards-text-canvas {
+  image-rendering: pixelated;
+  position: absolute; left: 0; top: 0; z-index: 2;
+  }
+
 #rightbottom {
+
   margin-top: 416px;
   width: 512px;
   height: 256px;
   position: absolute; left: 0; top: 0; z-index: 0;
-
 }
 
 #BGCards {
-  width: 512px;
-  height: 256px;
+  position: absolute; left: 0; top: 0; z-index: 0;
   image-rendering: pixelated;
+}
+
+#BGCardsBorder {
+  position: absolute; left: 0; top: 0; z-index: 10;
+  image-rendering: pixelated;
+}
+
+#clickareamap{
+  z-index: 10;
 }
 
 input {

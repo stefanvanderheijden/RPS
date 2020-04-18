@@ -16,7 +16,7 @@
         
         <img id="clickimage" src ="src/IMG/Border.png" width="736px" height="672px" usemap="#clickarea">
         
-        <map name="clickarea">
+        <map id="clickareamap" name="clickarea">
           <area id="p1area" shape="rect" coords="64,64,192,224" alt="p1" href="1.htm">
           <area id="p2area" shape="rect" coords="224,64,352,224" alt="p2" href="2.htm">
           <area id="p3area" shape="rect" coords="384,64,512,224" alt="p3" href="3.htm">
@@ -56,8 +56,16 @@
           </div>
        
         </div>
-        <div id="rightbottom" width="128px" height="64px">
-          <img id="BGCards" src ="src/IMG/CardsBG.png" width="128px" height="64px" usemap="#cardsarea">
+        <div id="rightbottom">
+          
+          <div id="cardstage" width="512px" height="256px">
+          
+            <canvas id="cards-gadget-canvas"  width="128px" height="64px"></canvas> 
+           
+            <canvas id="cards-text-canvas" width="512px" height="256px"></canvas> 
+          
+          <img id="BGCards" src ="src/IMG/CardsBG.png" width="512px" height="256px">
+          <img id="BGCardsBorder" src ="src/IMG/Cardroomborder.png" width="512px" height="256px" usemap="#cardsarea">
             <map name="cardsarea">
             <area id="yesbutton" shape="rect" coords="32,32,160,116" alt="p1" href="1.htm">
             <area id="nobutton" shape="rect" coords="32,140,160,224" alt="p2" href="2.htm">
@@ -66,10 +74,11 @@
             <area id="card2" shape="rect" coords="292,28,380,164" alt="p5" href="5.htm">
             <area id="card3" shape="rect" coords="396,28,484,164" alt="p6" href="6.htm">
             </map>
+          </div>
         </div>
         </div>
 
-   </div>
+   
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
