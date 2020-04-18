@@ -19,6 +19,8 @@ app.use(express.static(clientPath));
 // Create the server from http object
 const server = http.createServer(app);
 
+var gameStarted = false;
+
 // Create socketio server
 const io = socketio(server);
 
@@ -41,6 +43,11 @@ function UpdatePlayerArray(player) {
 function SendFullPlayerArray(player) {
     //send the full array to the new play er, so he has all the info
     player._socket.emit("getPlayerArray",leanPlayerArray);
+
+}
+
+function SendToAllPlayers(message) {
+    io.emit('message', message);
 }
 
 // If connected you receive an event called connection, with the object sock
@@ -91,6 +98,10 @@ io.on('connection', (sock) => {
             if (playerArray.length == 3 ) {
                 io.emit('message','gamestrats');
                 game = new SHGame(playerArray); 
+                gameStarted = true;
+
+                //set first president candidate
+                game._presidentCandidate = playerArray[0]._name;
             }
             // Append to player array
             // use socket reconnect function?
@@ -103,7 +114,12 @@ io.on('connection', (sock) => {
     });
 
     sock.on('vote', function(data)  {
+        //tell everybody who has voted on which seat
         io.emit('message',data.name + " has voted on seat " + data.vote);
+        //pass the voting information (the voter and his vote) to the game engine
+        if (gameStarted) {
+        game._voting(data.name,data.vote);
+        }
     });
 
     sock.on('emotionUpdate', function(data) {
