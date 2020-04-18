@@ -17,6 +17,7 @@ const GadgetCanvas = HTMLGadgetCanvas.getContext("2d")
 const HTMLTextCanvas = document.getElementById("text-canvas")
 const TextCanvas = HTMLTextCanvas.getContext("2d")
 
+//initialize the text canvas used on the cards window
 const HTMLCTextCanvas = document.getElementById("cards-text-canvas")
 const CTextCanvas = HTMLCTextCanvas.getContext("2d")
 
@@ -135,4 +136,5 @@ window.onload = function() {
 
 // Drawing the words on the YES and NO button
 
-CTextCanvas.fillText("TESTING", 130, 130);
+CTextCanvas.fillText("JAWOHL", 96, 80);
+CTextCanvas.fillText("NEIN", 96, 190);
