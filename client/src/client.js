@@ -89,6 +89,13 @@ sock.on("start", function(){
             console.log("drawing border")
         }
 
+        //TESTING
+        //drawRole(1,"president");
+        drawRole(2,"president");
+        //drawRole(3,"chancellor");
+        drawRole(4,"chancellor");
+        drawCNH(2);
+        //END TESTING
         started = true;
     });
     });
