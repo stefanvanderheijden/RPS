@@ -97,11 +97,10 @@ io.on('connection', (sock) => {
                 
             if (playerArray.length == 3 ) {
                 io.emit('message','gamestrats');
-                game = new SHGame(playerArray); 
-                gameStarted = true;
+                game = new SHGame(playerArray);
 
                 //set first president candidate
-                game._presidentCandidate = playerArray[0]._name;
+                game._presidentCandidate = playerArray[0];
             }
             // Append to player array
             // use socket reconnect function?
@@ -109,15 +108,16 @@ io.on('connection', (sock) => {
         });
 
     sock.on('message', (text) => {
-    //io.emit sends data to all connected sockets
+    //  io.emit sends data to all connected sockets
         io.emit('message', text);
     });
 
     sock.on('vote', function(data)  {
-        //tell everybody who has voted on which seat
-        io.emit('message',data.name + " has voted on seat " + data.vote);
-        //pass the voting information (the voter and his vote) to the game engine
-        if (gameStarted) {
+        // Tell everybody who has voted on which seat (debug)
+        // io.emit('message',data.name + " has voted on seat " + data.vote);
+        
+        // Pass the voting information (the voter and his vote) to the game engine
+        if (typeof game != "undefined") {
         game._voting(data.name,data.vote);
         }
     });

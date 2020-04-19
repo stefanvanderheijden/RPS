@@ -40,9 +40,14 @@ class Player {
         return this._identity;
     }
 
+    _getSeatNr(){
+        return this._seatnr;
+    }
+    
     _updateSocket(socket){
         this._socket = socket;
     }
+
 }
 
 
