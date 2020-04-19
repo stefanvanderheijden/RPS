@@ -30,40 +30,48 @@ class SHGame {
 
     // a function that retrieves the players name by inputting the seatnr
     _getPlayerBySeatNr(seatNr) {
+        var playertmp;  
         this._players.forEach((player) => {
+        
             // Check which player name coincides with player
-            if (player._seatnr == seatNr) {
-                return player
+            if (player._getSeatNr() == seatNr) {
+                playertmp=player;
             }
         });
+        return playertmp;
     }
 
     // a function that retrieves the players name by inputting the seatnr
     _getPlayerByName(name) {
+        var playertmp;  
         this._players.forEach((player) => {
+
             // Check which player name coincides with player
-            if (player._getSeatNr() == name) {
-                return player
+            if (player._getName() == name) {
+                playertmp=player;
             }
         });
+        return playertmp;
     }
 
     _voting(voter_name,vote_seatnr) {
         // this function received the name of the person who has voted 
         // and the seat number on which that person has voted.
-        
+        this._sendToPlayers("test");
         // Are we looking for chancellor?
-        if (this._lookingForChancellor == true) {
-            this._sendToPlayers("test");
+        if (this._lookingForChancellor == true) {   
             // Is the voter the president candidate?
-            if (voter_name == this._presidentCandidate) {
+            if (voter_name == this._presidentCandidate._getName()) {
+                
+
                 // Get voter player object
-                var voter = this._getPlayerNameByName(voter_name);
+                var voter = this._getPlayerByName(voter_name);
+                this._sendToPlayers(voter._getName());
                 // Get votee player object
-                var votee = this._getPlayerNameBySeatNr(vote_seatnr);
+                var votee = this._getPlayerBySeatNr(vote_seatnr);
 
                 if ((voter != votee) && (vote_seatnr <= this._numberOfPlayers)){
-                    this._chancellorCandidate = votedname;
+                    this._chancellorCandidate = votee;
                     this._sendToPlayers("The new candidate for chancellor is " + votee._getName());
                 } else {
                     voter._sendToPlayer('You did not enter a correct vote');
