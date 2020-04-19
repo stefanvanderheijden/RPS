@@ -2,10 +2,6 @@
 
 class SHGame {
     constructor(players){
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/kingtags
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._players = players;
         this.hasBegun = true;
@@ -27,11 +23,8 @@ class SHGame {
 
         // Game states - make separate class
         this._lookingForChancellor = true;
-<<<<<<< HEAD
         this._janein = false;
 
-=======
->>>>>>> feature/kingtags
     }
 
     // a function that retrieves the players name by inputting the seatnr
