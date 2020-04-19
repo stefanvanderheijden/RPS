@@ -33,7 +33,7 @@ let leanPlayerArray = [];
 function UpdatePlayerArray(player) {
     playerArray.push(player);   
     // create a new lean player object (dictionary)
-    leanPlayer = {name : player._name, seatnr : player._seatnr, identity : player._identity, party : player._party, emotion : 0};
+    leanPlayer = {name : player._name, seatnr : player._seatnr, identity : player._identity, party : player._party, emotion : 0, role : player._role};
     // add this lean player to the leanplayer array
     leanPlayerArray.push(leanPlayer);
     // send this lean player to all the clients (not the full array)

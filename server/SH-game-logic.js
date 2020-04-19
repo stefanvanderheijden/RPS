@@ -2,7 +2,10 @@
 
 class SHGame {
     constructor(players){
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/kingtags
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._players = players;
         this.hasBegun = true;
@@ -24,8 +27,11 @@ class SHGame {
 
         // Game states - make separate class
         this._lookingForChancellor = true;
+<<<<<<< HEAD
         this._janein = false;
 
+=======
+>>>>>>> feature/kingtags
     }
 
     // a function that retrieves the players name by inputting the seatnr
@@ -84,7 +90,6 @@ class SHGame {
        this._players.forEach((player) => {
            player._sendToPlayer(msg);
        });
-
     }
 
     // This function assigns roles and ids to each player
@@ -94,8 +99,10 @@ class SHGame {
         // Loop over each player
         playerarray.forEach((player) => {
             var randomNr = Math.floor(Math.random() * roledict.length);
+            
             // Assign a random role to each player from the given dictionary
             player._assignIdentity(roledict[randomNr]);
+
             // Print role to chat
             player._sendToPlayer('Role: ' + roledict[randomNr])
             player._sendToPlayer('Party: ' + player._getParty())
@@ -108,8 +115,6 @@ class SHGame {
 
             // Remove role from array
             roledict.splice(randomNr, 1);
-
-
         });
 
         // Announce the ID's to the fascists
@@ -120,12 +125,8 @@ class SHGame {
                     fascist._sendToPlayer(idmsg);
                 });
             }
-
         });
-
-
     }
-
 }
 
 

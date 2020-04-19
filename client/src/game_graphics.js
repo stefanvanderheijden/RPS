@@ -7,7 +7,7 @@ const BGCanvas = HTMLBGCanvas.getContext("2d")
 const HTMLCharCanvas = document.getElementById("char-canvas")
 const CharCanvas = HTMLCharCanvas.getContext("2d")
 
-//initialize the gadget canvas; draws emotions, tokens, cards etc
+//initialize the gadget canvas; draws emotions, tokens
 const HTMLGadgetCanvas = document.getElementById("gadget-canvas")
 const GadgetCanvas = HTMLGadgetCanvas.getContext("2d")
 
@@ -85,6 +85,23 @@ emo7.src = "src/IMG/emo/7.png";
 var emo8 = new Image();
 emo8.src = "src/IMG/emo/8.png";
 
+//load all tokens
+var presidentIMG = new Image();
+presidentIMG.src = "src/IMG/Presi.png";
+
+var presidentCandidateIMG = new Image();
+presidentCandidateIMG.src = "src/IMG/PresiCandi.png";
+
+var chancellorIMG = new Image();
+chancellorIMG.src = "src/IMG/Chan.png";
+
+var chancellorCandidateIMG = new Image();
+chancellorCandidateIMG.src = "src/IMG/ChanCandi.png";
+
+//Load NOT HITLER token
+var CNHIMG = new Image();
+CNHIMG.src = "src/IMG/CNH.png";
+
 //create an array of the emotion image objects
 const emotions = [emo0, emo1, emo2, emo3, emo4, emo5, emo6, emo7, emo8]
 
@@ -123,18 +140,60 @@ function drawEmotion(emotionindex, seatnumber) {
     GadgetCanvas.drawImage(emotion, seat.x, seat.y)
 }
 
-window.onload = function() {
-    Seats.forEach(seat => {
+function drawRole(seatnumber, role) {
+    //this function takes in a seatnr and a rol, clears the token on that seatnumber and draw the token for the role.
+    
+    //retrieve the seat-object that belongs to the seat (so to get the X and Y coordinates of the seat)
+    seat = Seats[seatnumber-1];
 
+    //clear the image that is currently on the token area
+    GadgetCanvas.clearRect(seat.x+19,seat.y+19,13,13)
 
-    //TextCanvas.fillText(seat.name, 4*(seat.x+15), 4*(seat.y+36));
-    });
-
-    BGCanvas.drawImage(background, 0, 0);
-   
+    //draw a new token in case of a role
+    switch(role) {
+        case "president":
+            {
+            GadgetCanvas.drawImage(presidentIMG, seat.x+20, seat.y+20);
+            console.log("drawing president token");
+            break;
+            }
+        case "presidentCandidate":
+            {
+            GadgetCanvas.drawImage(presidentCandidateIMG, seat.x+20, seat.y+20);
+            break;               
+            }
+        case "chancellor":
+            {
+            GadgetCanvas.drawImage(chancellorIMG, seat.x+20, seat.y+20);
+            break;
+            }
+        case "chancellorCandidate":
+            {
+            GadgetCanvas.drawImage(chancellorCandidateIMG, seat.x+20, seat.y+20);
+            break;    
+            }
+        case null:
+            {
+            break;  
+            }
+    }
 }
 
-// Drawing the words on the YES and NO button
+function drawCNH(seatnumber) {
+    seat = Seats[seatnumber-1];
+    GadgetCanvas.drawImage(CNHIMG, seat.x+2, seat.y+21);
 
+}
+
+
+window.onload = function() {
+    //Draw the background image
+    BGCanvas.drawImage(background, 0, 0);
+
+}
+
+
+// Drawing the words on the YES and NO button on the cards area (bottom right)
 CTextCanvas.fillText("JAWOHL", 96, 80);
 CTextCanvas.fillText("NEIN", 96, 190);
+

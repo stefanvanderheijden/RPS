@@ -12,6 +12,7 @@ class Player {
         // Game related class variables
         this._identity = null;
         this._party = null;
+        this._role = null;
     }
 
     _sendToPlayer(msg) {
