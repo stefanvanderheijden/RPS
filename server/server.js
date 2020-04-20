@@ -27,8 +27,8 @@ const io = socketio(server);
 let waitingPlayer = null;
 
 // Define player array, must be filled in connection function
-let playerArray = [];
-let leanPlayerArray = [];
+var playerArray = [];
+var leanPlayerArray = [];
 
 function UpdatePlayerArray(player) {
     playerArray.push(player);   
@@ -97,7 +97,7 @@ io.on('connection', (sock) => {
                 
             if (playerArray.length == 3 ) {
                 io.emit('message','gamestrats');
-                game = new SHGame(playerArray);
+                game = new SHGame(playerArray, leanPlayerArray);
 
                 //set first president candidate
                 game._presidentCandidate = playerArray[0];

@@ -12,6 +12,8 @@ class Player {
         // Game related class variables
         this._identity = null;
         this._party = null;
+
+        // role can be set to: null, president, presidentCandidate, chancellor, chancellorCandidate
         this._role = null;
     }
 
@@ -43,6 +45,10 @@ class Player {
 
     _getSeatNr(){
         return this._seatnr;
+    }
+
+    _getRole(){
+        return this._role;
     }
     
     _updateSocket(socket){

@@ -1,7 +1,7 @@
 // seven player game
 
 class SHGame {
-    constructor(players){
+    constructor(players,leanPlayerArray){
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._players = players;
         this.hasBegun = true;
@@ -24,6 +24,8 @@ class SHGame {
         // Game states - make separate class
         this._lookingForChancellor = true;
         this._janein = false;
+
+        this._leanPlayerArray = leanPlayerArray;
 
     }
 
@@ -53,6 +55,17 @@ class SHGame {
         return playertmp;
     }
 
+    _updateRoles() {
+        //this function updates the roles in the lean player array, used for graphics on client side
+        var i;
+        for (i = 0; i < this._leanPlayerArray.length; i++) {
+          //update the leanPlayerArray with information from the 'real' player array
+          this._leanPlayerArray[i].role = this._players[i]._getRole();
+          io.emit("roleUpdate", leanPlayerArray);
+        }            
+        };
+    
+
     _voting(voter_name,vote_seatnr) {
         // this function received the name of the person who has voted 
         // and the seat number on which that person has voted.
@@ -72,6 +85,7 @@ class SHGame {
                 if ((voter != votee) && (vote_seatnr <= this._numberOfPlayers)){
                     this._chancellorCandidate = votee;
                     this._sendToPlayers("The new candidate for chancellor is " + votee._getName());
+                    this._updateRoles();
                 } else {
                     voter._sendToPlayer('You did not enter a correct vote');
                 }
