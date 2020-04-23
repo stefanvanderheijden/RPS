@@ -89,19 +89,18 @@ sock.on("start", function(){
             console.log("drawing border")
         }
 
-        //TESTING
-        //drawRole(1,"president");
-        drawRole(2,"president");
-        //drawRole(3,"chancellor");
-        drawRole(4,"chancellor");
-        drawCNH(2);
-        //END TESTING
         started = true;
     });
     });
 
 sock.on('emotionUpdating', function(data) {
     drawEmotion(data.emotion, data.seatnr);
+});
+
+sock.on("rolesUpdate", function(leanPlayerArray) {
+    leanPlayerArray.forEach((player) => {
+        drawRole(player.seatnr,player.role);
+    });
 });
     
 
@@ -132,10 +131,10 @@ $("#yesbutton").on("click", function(e) {
     });
 
 $("#nobutton").on("click", function(e) {
-        // Prevent the default link to be opened for the area in the HTML
-        e.preventDefault();
-        // Actions when clicked on the NEIN BUTTON
-        });
+    // Prevent the default link to be opened for the area in the HTML
+    e.preventDefault();
+    // Actions when clicked on the NEIN BUTTON
+    });
 
 $("#cardsbutton").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
