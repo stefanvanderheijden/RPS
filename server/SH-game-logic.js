@@ -56,15 +56,35 @@ class SHGame {
     }
 
     _updateRoles() {
+        //this function assigns each player object the role that it has according to the game object data
         //this function updates the roles in the lean player array, used for graphics on client side
+        
+        this._players.forEach((player) => {
+            if (player == this._presidentCandidate){
+                player._assignRole("presidentCandidate");
+            }  else if (player == this._chancellorCandidate){
+                player._assignRole("chancellorCandidate");
+            } else if (player == this._president){
+                player._assignRole("president");
+            } else if (player == this._chancellor){
+                player._assignRole("chancellor");
+            }   else {
+                player._assignRole(null);
+            }
+        });
+
+        //Update the Lean player array
         var i;
         for (i = 0; i < this._leanPlayerArray.length; i++) {
           //update the leanPlayerArray with information from the 'real' player array
           this._leanPlayerArray[i].role = this._players[i]._getRole();
-          io.emit("roleUpdate", leanPlayerArray);
-        }            
         };
-    
+        
+        //Send the leanPlayerArray to all player object (and let them send it to the socket of that player)
+        this._players.forEach((player) => {
+            player._updateLeanPlayerList(this._leanPlayerArray);
+        });
+    }
 
     _voting(voter_name,vote_seatnr) {
         // this function received the name of the person who has voted 

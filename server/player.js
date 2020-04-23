@@ -21,6 +21,10 @@ class Player {
        this._socket.emit('message', msg);
     }
 
+    _updateLeanPlayerList(leanPlayerArray) {
+        this._socket.emit("rolesUpdate", leanPlayerArray);
+    }
+
     _assignIdentity(identity) {
         this._identity = identity;
         // Base the party on the given ID
@@ -29,6 +33,10 @@ class Player {
         } else {
             this._party = 'Liberal';
         }
+    }
+
+    _assignRole(role) {
+        this._role = role;
     }
 
     _getName(){
