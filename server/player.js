@@ -18,6 +18,7 @@ class Player {
 
         // Has the player voted ja/nein?
         this._hasVoted = false;
+        this._mostRecentVote = null;
     }
 
     _sendToPlayer(msg) {
@@ -26,6 +27,10 @@ class Player {
 
     _updateLeanPlayerList(leanPlayerArray) {
         this._socket.emit("rolesUpdate", leanPlayerArray);
+    }
+
+    _updateVotes(votesArray) {
+        this._socket.emit("votesUpdate", votesArray);
     }
 
     _assignIdentity(identity) {
@@ -72,6 +77,13 @@ class Player {
 
     _setHasVoted(bool){
         this._hasVoted = bool;
+    }
+
+    _getMostRecentVote(){
+        return this._mostRecentVote;
+    }
+    _setMostRecentVote(bool){
+        this._mostRecentVote = bool;
     }
 
 }

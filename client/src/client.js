@@ -93,13 +93,6 @@ sock.on("start", function(){
             drawBorder(player.seatnr);
             console.log("drawing border")
         }
-        //TESTING
-        drawVote(1,1);
-        drawVote(2,0);
-        drawVote(3,1);
-        drawVote(4,1);
-        drawVote(5,0);
-        //END TESTING
         started = true;
     });
     });
@@ -111,6 +104,12 @@ sock.on('emotionUpdating', function(data) {
 sock.on("rolesUpdate", function(leanPlayerArray) {
     leanPlayerArray.forEach((player) => {
         drawRole(player.seatnr,player.role);
+    });
+});
+
+sock.on("votesUpdate", function(votesArray) {
+    votesArray.forEach((vote) => {
+        drawVote(vote[0], vote[1]);
     });
 });
     

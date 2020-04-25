@@ -243,11 +243,16 @@ class SHGame {
 
             // Check whether the voter has already voted
             if (voter._getHasVoted() == false) {
-                // Add vote to total vote count
+                // Add vote to the ja vs nein counter
                 this._addJaNeinToCount(voter_vote);
+                // Add vote to total vote count
                 this._addJaNeinToVotes();
                 voter._sendToPlayer("Your vote has been registriert")
+                // Change voter status to has voted
                 voter._setHasVoted(true);
+                // Store the vote
+                voter._setMostRecentVote(voter_vote);
+
 
                 // Vote results (check if total vote count reached the amount of players)
                 if (this._getJaNeinVotingCount() == this._getNumberOfPlayers()){
@@ -257,19 +262,25 @@ class SHGame {
                     if (this._getJaNeinCounter() > Math.floor(this._getNumberOfPlayers()/2)){
                     // if (this._getJaNeinCounter() > Math.floor(1.5) ){
                         this._sendToPlayers("The majority has voted yes");
+
+                        this._sendVotesToClient();
                         // TODO: CHECK #RED POLICY CARDS + CHANCELLOR IS HITLER --> IF NOT HITLER + CNH LOGO (SEPARATE FUNCTION)
-                        // set president and chancelllor, assign new candidate
+                        // TODO: president and chancelllor, assign new candidate
+                        this._updateRoles();
                         this._resetElectionTracker();
                     } else {
                         this._sendToPlayers("The majority has voted no");
-                        // Assign new candidate
-                        // Increase election trackey by one
+                        // TODO: Assign new candidate
+                        this._updateRoles();
+                        // Increase election tracker by one
                         this._addToElectionTracker();
                     }
 
                     this._sendToPlayers("Voting has completed");
 
-                    
+                    // Send votes to client
+
+
                     // Reset ja/nein counters (plural)
                     this._resetJaNeinCounters();
                     // Reset has voted player state for each player
@@ -280,7 +291,11 @@ class SHGame {
                     // this._setPolicySelection(true);
 
                 }
-            }                
+            }  else {
+                voter._sendToPlayer("You already voted")
+            }              
+        } else {
+            voter._sendToPlayer("There is no reason to vote")
         }
     }
 
@@ -323,6 +338,16 @@ class SHGame {
                     fascist._sendToPlayer(idmsg);
                 });
             }
+        });
+    }
+
+    _sendVotesToClient(){
+        var votes = []
+        this._players.forEach((player) => {
+            votes.push([player._getSeatNr(), player._getMostRecentVote() ] );
+        });
+        this._players.forEach((player) => {
+            player._updateVotes(votes) ;
         });
     }
 }
