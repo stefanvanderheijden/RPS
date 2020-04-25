@@ -21,6 +21,10 @@ const TextCanvas = HTMLTextCanvas.getContext("2d")
 const HTMLCTextCanvas = document.getElementById("cards-text-canvas")
 const CTextCanvas = HTMLCTextCanvas.getContext("2d")
 
+//initialize the gadget canvas on the card window
+const HTMLCGadgetCanvas = document.getElementById("cards-gadget-canvas")
+const CGadgetCanvas = HTMLCGadgetCanvas.getContext("2d")
+
 var VT323 = new FontFace("VT323", "https://fonts.googleapis.com/css2?family=VT323&display=swap");
 TextCanvas.font = "30px VT323";
 TextCanvas.textAlign = "center";
@@ -116,6 +120,13 @@ HitlerBG.src = "src/IMG/HitlerBG.png"
 var CNHIMG = new Image();
 CNHIMG.src = "src/IMG/CNH.png";
 
+//Load the two types of cards (the large versions in the bottom right)
+var Fcard = new Image();
+Fcard.src = "src/IMG/Fcard.png";
+
+var Lcard = new Image();
+Lcard.src = "src/IMG/Lcard.png";
+
 //create an array of the emotion image objects
 const emotions = [emo0, emo1, emo2, emo3, emo4, emo5, emo6, emo7, emo8]
 
@@ -132,6 +143,13 @@ S9 = new Createseat(16,112);
 S10 = new Createseat(16,64);
 
 const Seats = [S1,S2,S3,S4,S5,S6,S7,S8,S9,S10];
+
+//Creating all the card locations
+C1 = new Createseat(47,4);
+C2 = new Createseat(73,7);
+C3 = new Createseat(99,7);
+
+const CardLocations = [C1,C2,C3];
 
 function drawName(name,seatnumber) {
     seat = Seats[seatnumber-1];
@@ -152,6 +170,30 @@ function drawEmotion(emotionindex, seatnumber) {
     emotion = emotions[emotionindex]
     GadgetCanvas.clearRect(seat.x+6, seat.y+6, 20, 14);
     GadgetCanvas.drawImage(emotion, seat.x, seat.y)
+}
+
+function drawCards(cards) {
+    //clear a rectangle on the canvas
+    
+    //draw the cards that have been passed.
+    cardNo = 0;
+
+    cards.forEach((card) => {
+        cardLocation = CardLocations[cardNo];
+        if (card == "fascist") {
+            //draw a fascist card
+            CGadgetCanvas.drawImage(Fcard,cardLocation.x,cardLocation.y);
+
+        } else if (card == "liberal") {
+            //draw a liberal card
+            CGadgetCanvas.drawImage(Lcard,cardLocation.x,cardLocation.y);
+        }
+        cardNo ++;
+    });
+}
+
+function clearCards() {
+    CGadgetCanvas.clearRect(47,7,78,37);
 }
 
 function setBackground() {
