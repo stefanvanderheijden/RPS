@@ -52,7 +52,7 @@ var started = false;
 // When refreshing the page, a prompt appears to enter the player name
 // TODO: capital letters/spelling mistakes/etc and max name length
 // TODO: make separate function that automatically sends to server
-var person = prompt("Please enter your name:", "kksukkel");
+var person = prompt("Please enter your name:", "name");
 
 // Send playername to server
 sock.emit('playername',person)
