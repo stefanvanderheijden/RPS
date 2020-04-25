@@ -298,7 +298,6 @@ class SHGame {
                 voter._sendToPlayer("You already voted")
             }              
         } else {
-            voter._sendToPlayer("There is no reason to vote")
         }
     }
 
