@@ -199,7 +199,7 @@ class SHGame {
                 voter._setHasVoted(true);
 
                 // Vote results (check if total vote count reached the amount of players)
-                if (this._getJaNeinCounter == this._getNumberOfPlayers()){
+                if (this._getJaNeinVotingCount() == this._getNumberOfPlayers()){
                 // if (this._getJaNeinVotingCount() == 3){
                     
                     this._sendToPlayers("Voting has completed");
