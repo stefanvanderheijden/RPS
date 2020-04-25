@@ -22,7 +22,7 @@ class SHGame {
         this._chancellor = null;
 
         // Game states - make separate class
-        this._lookingForChancellor = true;
+        this._lookingForChancellor = false;
         this._janeinState = false;
         
         // Vote counters
@@ -34,12 +34,24 @@ class SHGame {
 
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // Game states
+    //////////////////////////////////////////////////////////////////////////////////////////////
+ 
+
     _getNumberOfPlayers(){
         return this._numberOfPlayers;
     }
 
     _setLookingForchancellor(bool){
         this._lookingForChancellor = bool;
+
+        if (bool == true) {
+            this._sendToPlayers(this._getPresidentCandidate()._getName() + " must choose a chancellor");
+        }
+        else if (bool == false){
+            this._sendToPlayers(this._getChancellorCandidate()._getName() + " is chancellor candidate");
+        } 
     }
 
     _setJaNeinState (bool) {
@@ -61,6 +73,7 @@ class SHGame {
         // Add the vote (0 or 1) to vote counter
         this._jaNeinCounter = this._jaNeinCounter + vote;
     }
+
     _getJaNeinCounter(){
         return this._jaNeinCounter;
     }
@@ -68,6 +81,7 @@ class SHGame {
     _addJaNeinToVotes(){
         this._jaNeinVotes = this._jaNeinVotes + 1;
     }
+
     _getJaNeinVotingCount(){
         return this._jaNeinVotes;
     }
@@ -81,9 +95,11 @@ class SHGame {
     _addToElectionTracker(){
         this._electionTracker = this._electionTracker + 1;
     }
+
     _getElectionTracker(){
         return this._electionTracker;
     }
+
     _resetElectionTracker(){
         this._electionTracker = 0;
     }
@@ -91,6 +107,31 @@ class SHGame {
     //////////////////////////////////////////////////////////////////////////////////////////////
     // Player functions
     //////////////////////////////////////////////////////////////////////////////////////////////
+
+    _setPresidentCandidate(player){
+        this._presidentCandidate = player;
+    }
+    _getPresidentCandidate(){
+        return this._presidentCandidate;
+    }
+    _setChancellorCandidate(player){
+        this._chancellorCandidate = player;
+    }
+    _getChancellorCandidate(){
+        return this._chancellorCandidate;
+    }
+    _setPresident(player){
+        this._president = player;
+    }
+    _getPresident(){
+        return this._president;
+    }
+    _setChancellor(player){
+        this._setChancellor = player;
+    }
+    _getChancellor(){
+        return this._chancellor;
+    }
 
     // a function that retrieves the players name by inputting the seatnr
     _getPlayerBySeatNr(seatNr) {
@@ -131,13 +172,13 @@ class SHGame {
         //this function updates the roles in the lean player array, used for graphics on client side
         
         this._players.forEach((player) => {
-            if (player == this._presidentCandidate){
+            if (player == this._getPresidentCandidate()){
                 player._assignRole("presidentCandidate");
-            }  else if (player == this._chancellorCandidate){
+            }  else if (player == this._getChancellorCandidate()){
                 player._assignRole("chancellorCandidate");
-            } else if (player == this._president){
+            } else if (player == this._getPresident()){
                 player._assignRole("president");
-            } else if (player == this._chancellor){
+            } else if (player == this._getChancellor()){
                 player._assignRole("chancellor");
             }   else {
                 player._assignRole(null);
@@ -157,6 +198,16 @@ class SHGame {
         });
     }
 
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // Game logic
+    //////////////////////////////////////////////////////////////////////////////////////////////
+   
+    _startGameRound(){
+        // start goverment election
+        this._setLookingForchancellor(true);
+        // Check win conditions
+    }
+
     _voting(voter_name,vote_seatnr) {
         // this function received the name of the person who has voted 
         // and the seat number on which that person has voted.
@@ -164,7 +215,7 @@ class SHGame {
         // Are we looking for chancellor?
         if (this._lookingForChancellor == true) {   
             // Is the voter the president candidate?
-            if (voter_name == this._presidentCandidate._getName()) {
+            if (voter_name == this._getPresidentCandidate()._getName()) {
                 
 
                 // Get voter player object
@@ -174,7 +225,7 @@ class SHGame {
                 var votee = this._getPlayerBySeatNr(vote_seatnr);
 
                 if ((voter != votee) && (vote_seatnr <= this._numberOfPlayers)){
-                    this._chancellorCandidate = votee;
+                    this._setChancellorCandidate(votee);
                     this._sendToPlayers("The new candidate for chancellor is " + votee._getName());
                     this._updateRoles();
                     this._setLookingForchancellor(false);
@@ -202,25 +253,31 @@ class SHGame {
                 if (this._getJaNeinVotingCount() == this._getNumberOfPlayers()){
                 // if (this._getJaNeinVotingCount() == 3){
                     
-                    this._sendToPlayers("Voting has completed");
-
+                    
                     if (this._getJaNeinCounter() > Math.floor(this._getNumberOfPlayers()/2)){
                     // if (this._getJaNeinCounter() > Math.floor(1.5) ){
                         this._sendToPlayers("The majority has voted yes");
+                        // TODO: CHECK #RED POLICY CARDS + CHANCELLOR IS HITLER --> IF NOT HITLER + CNH LOGO (SEPARATE FUNCTION)
+                        // set president and chancelllor, assign new candidate
                         this._resetElectionTracker();
                     } else {
                         this._sendToPlayers("The majority has voted no");
+                        // Assign new candidate
                         // Increase election trackey by one
                         this._addToElectionTracker();
                     }
 
+                    this._sendToPlayers("Voting has completed");
 
+                    
                     // Reset ja/nein counters (plural)
                     this._resetJaNeinCounters();
                     // Reset has voted player state for each player
                     this._resetHasVoted();
                     // Set accepting votes to false
                     this._setJaNeinState(false);
+                    // Enter policy selection state
+                    // this._setPolicySelection(true);
 
                 }
             }                

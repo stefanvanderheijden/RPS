@@ -100,7 +100,9 @@ io.on('connection', (sock) => {
                 game = new SHGame(playerArray, leanPlayerArray);
 
                 //set first president candidate
-                game._presidentCandidate = playerArray[0];
+                game._setPresidentCandidate(playerArray[0]);
+                game._startGameRound();
+
             }
             // Append to player array
             // use socket reconnect function?
