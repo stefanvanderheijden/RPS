@@ -93,7 +93,13 @@ sock.on("start", function(){
             drawBorder(player.seatnr);
             console.log("drawing border")
         }
-
+        //TESTING
+        drawVote(1,1);
+        drawVote(2,0);
+        drawVote(3,1);
+        drawVote(4,1);
+        drawVote(5,0);
+        //END TESTING
         started = true;
     });
     });
@@ -168,3 +174,6 @@ $("#card3").on("click", function(e) {
     e.preventDefault();
     // Actions when clicked on the THIRD CARD
     });
+
+
+// TESTING

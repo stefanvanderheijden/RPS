@@ -1,5 +1,5 @@
 
-//initialize background canas; draws the background
+//initialize background canas; draws the background and the character color back.
 const HTMLBGCanvas = document.getElementById("bg-canvas")
 const BGCanvas = HTMLBGCanvas.getContext("2d")
 
@@ -98,6 +98,20 @@ chancellorIMG.src = "src/IMG/Chan.png";
 var chancellorCandidateIMG = new Image();
 chancellorCandidateIMG.src = "src/IMG/ChanCandi.png";
 
+//load yes and no images
+var YesVote = new Image();
+YesVote.src = "src/IMG/YesVote.png"
+
+var NoVote = new Image();
+NoVote.src = "src/IMG/NoVote.png"
+
+//load backgrounds for fascist and hitler
+var FascistBG = new Image();
+FascistBG.src = "src/IMG/FascistBG.png"
+
+var HitlerBG = new Image();
+HitlerBG.src = "src/IMG/HitlerBG.png"
+
 //Load NOT HITLER token
 var CNHIMG = new Image();
 CNHIMG.src = "src/IMG/CNH.png";
@@ -138,6 +152,36 @@ function drawEmotion(emotionindex, seatnumber) {
     emotion = emotions[emotionindex]
     GadgetCanvas.clearRect(seat.x+6, seat.y+6, 20, 14);
     GadgetCanvas.drawImage(emotion, seat.x, seat.y)
+}
+
+function setBackground() {
+    //this function sets the background behind hitler and fascists. 
+    //it is only used by members of the fascist party.
+}
+
+// This function draws the vote on a specific seatnumber
+function drawVote(seatnumber,vote) {
+    seat = Seats[seatnumber-1];
+
+    //clear the space where the vote is displayed
+    GadgetCanvas.clearRect(seat.x+2,seat.y+36,28,4)
+    switch(vote) {
+        case 1: 
+            console.log('drawing Yes vote')
+            GadgetCanvas.drawImage(YesVote,seat.x+2,seat.y+36);
+            break;
+        case 0: 
+            console.log('drawing No vote')
+            GadgetCanvas.drawImage(NoVote,seat.x+2,seat.y+36);
+            break;
+                }
+}
+
+// This function clears all the visual votes from the board
+function clearVote() {
+    Seats.forEach((seat) => {
+        GadgetCanvas.clearRect(seat.x+3,seat.y+39,28,4)
+    });
 }
 
 function drawRole(seatnumber, role) {
@@ -182,7 +226,6 @@ function drawRole(seatnumber, role) {
 function drawCNH(seatnumber) {
     seat = Seats[seatnumber-1];
     GadgetCanvas.drawImage(CNHIMG, seat.x+2, seat.y+21);
-
 }
 
 
