@@ -37,6 +37,11 @@ function sendVote(areanumber) {
     sock.emit("vote", {name: person, vote: areanumber});
 };
 
+function sendJaNein(jaodernein){
+    // emit the ja or nein vote to the server with client name
+    sock.emit('janein', {name: person, vote: jaodernein});
+};
+
 
 // Create local playerArray to use in graphics
 var localplayerArray = [];
@@ -128,12 +133,16 @@ $("#yesbutton").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
     // Actions when clicked on the JAWOHL BUTTON
+    writeEvent("You clicked on yes");
+    sendJaNein(1);
     });
 
 $("#nobutton").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
     // Actions when clicked on the NEIN BUTTON
+    writeEvent("You clicked on nein");
+    sendJaNein(0);
     });
 
 $("#cardsbutton").on("click", function(e) {

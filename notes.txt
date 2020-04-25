@@ -9,12 +9,21 @@ TODO: define two states that indicate whether the game has begun or not
 # problem: what if game is already going? if players refreshes and name doesn't match: nothing happens?
 # solution: after every round recheck player array.
 
-Step 2:
+Step 2: done
 Create class function in player class that updates player array - done
 
-step 3: 
+step 3: done
 Start game, choose hitler and party
 
-step 4:
-Create game class, make rounds and voting system
+step 4: done
+Create game class, 
+
+Step 5: done
+Chancellor voting system, ja/nein voting system. Both made as callback functions depending on game state
+
+Step 6:
+Class representing the draw/discard decks, maintaining order
+
+Step 7:
+Create rounds WITHOUT special actions
 Create gamestate array containing roundnumber, vote count etc.

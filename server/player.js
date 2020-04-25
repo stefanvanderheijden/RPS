@@ -15,6 +15,9 @@ class Player {
 
         // role can be set to: null, president, presidentCandidate, chancellor, chancellorCandidate
         this._role = null;
+
+        // Has the player voted ja/nein?
+        this._hasVoted = false;
     }
 
     _sendToPlayer(msg) {
@@ -61,6 +64,14 @@ class Player {
     
     _updateSocket(socket){
         this._socket = socket;
+    }
+
+    _getHasVoted(){
+        return this._hasVoted;
+    }
+
+    _setHasVoted(bool){
+        this._hasVoted = bool;
     }
 
 }

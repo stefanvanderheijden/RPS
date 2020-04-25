@@ -95,7 +95,7 @@ io.on('connection', (sock) => {
                 }               
             }
                 
-            if (playerArray.length == 3 ) {
+            if (playerArray.length == 7 ) {
                 io.emit('message','gamestrats');
                 game = new SHGame(playerArray, leanPlayerArray);
 
@@ -118,8 +118,14 @@ io.on('connection', (sock) => {
         
         // Pass the voting information (the voter and his vote) to the game engine
         if (typeof game != "undefined") {
-        game._voting(data.name,data.vote);
+            game._voting(data.name,data.vote);
         }
+    });
+
+    sock.on('janein', function(data) {
+        if (typeof game != "undefined") {
+            game._acceptJaNein(data.name,data.vote);
+            }
     });
 
     sock.on('emotionUpdate', function(data) {

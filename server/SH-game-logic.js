@@ -4,7 +4,7 @@ class SHGame {
     constructor(players,leanPlayerArray){
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._players = players;
-        this.hasBegun = true;
+        this._hasBegun = true;
 
         this._sendToPlayers('Secret hitler starts!');
         
@@ -23,11 +23,74 @@ class SHGame {
 
         // Game states - make separate class
         this._lookingForChancellor = true;
-        this._janein = false;
+        this._janeinState = false;
+        
+        // Vote counters
+        this._jaNeinCounter = 0;
+        this._jaNeinVotes = 0;
+        this._electionTracker = 0;
 
         this._leanPlayerArray = leanPlayerArray;
 
     }
+
+    _getNumberOfPlayers(){
+        return this._numberOfPlayers;
+    }
+
+    _setLookingForchancellor(bool){
+        this._lookingForChancellor = bool;
+    }
+
+    _setJaNeinState (bool) {
+        this._janeinState = bool;
+
+        if (bool == true) {
+            this._sendToPlayers("Sie musst Ja oder Nein stimmen");
+        }
+        else if (bool == false){
+            this._sendToPlayers("Sie konnte nicht mehr stimmen");
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // Voting counters
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    
+    _addJaNeinToCount(vote){
+        // Add the vote (0 or 1) to vote counter
+        this._jaNeinCounter = this._jaNeinCounter + vote;
+    }
+    _getJaNeinCounter(){
+        return this._jaNeinCounter;
+    }
+
+    _addJaNeinToVotes(){
+        this._jaNeinVotes = this._jaNeinVotes + 1;
+    }
+    _getJaNeinVotingCount(){
+        return this._jaNeinVotes;
+    }
+
+    _resetJaNeinCounters(){
+        // Reset ja/nein counter and ja/nein voting count when voting has completed
+        this._jaNeinCounter = 0;
+        this._jaNeinVotes = 0;
+    }
+
+    _addToElectionTracker(){
+        this._electionTracker = this._electionTracker + 1;
+    }
+    _getElectionTracker(){
+        return this._electionTracker;
+    }
+    _resetElectionTracker(){
+        this._electionTracker = 0;
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    // Player functions
+    //////////////////////////////////////////////////////////////////////////////////////////////
 
     // a function that retrieves the players name by inputting the seatnr
     _getPlayerBySeatNr(seatNr) {
@@ -53,6 +116,14 @@ class SHGame {
             }
         });
         return playertmp;
+    }
+
+    _resetHasVoted() {
+        // Reset hasVoted state for each player
+        
+        this._players.forEach((player) => {
+            player._setHasVoted(false);
+        });
     }
 
     _updateRoles() {
@@ -89,7 +160,7 @@ class SHGame {
     _voting(voter_name,vote_seatnr) {
         // this function received the name of the person who has voted 
         // and the seat number on which that person has voted.
-        this._sendToPlayers("test");
+        // this._sendToPlayers("test");
         // Are we looking for chancellor?
         if (this._lookingForChancellor == true) {   
             // Is the voter the president candidate?
@@ -106,10 +177,53 @@ class SHGame {
                     this._chancellorCandidate = votee;
                     this._sendToPlayers("The new candidate for chancellor is " + votee._getName());
                     this._updateRoles();
+                    this._setLookingForchancellor(false);
+                    this._setJaNeinState(true);
                 } else {
                     voter._sendToPlayer('You did not enter a correct vote');
                 }
             }
+        }
+    }
+
+    _acceptJaNein(voter_name, voter_vote) {
+        if (this._janeinState == true){
+            var voter = this._getPlayerByName(voter_name);
+
+            // Check whether the voter has already voted
+            if (voter._getHasVoted() == false) {
+                // Add vote to total vote count
+                this._addJaNeinToCount(voter_vote);
+                this._addJaNeinToVotes();
+                voter._sendToPlayer("Your vote has been registriert")
+                voter._setHasVoted(true);
+
+                // Vote results (check if total vote count reached the amount of players)
+                if (this._getJaNeinCounter == this._getNumberOfPlayers){
+                // if (this._getJaNeinVotingCount() == 3){
+                    
+                    this._sendToPlayers("Voting has completed");
+
+                    if (this._getJaNeinCounter() > Math.floor(this._getNumberOfPlayers()/2)){
+                    // if (this._getJaNeinCounter() > Math.floor(1.5) ){
+                        this._sendToPlayers("The majority has voted yes");
+                        this._resetElectionTracker();
+                    } else {
+                        this._sendToPlayers("The majority has voted no");
+                        // Increase election trackey by one
+                        this._addToElectionTracker();
+                    }
+
+
+                    // Reset ja/nein counters (plural)
+                    this._resetJaNeinCounters();
+                    // Reset has voted player state for each player
+                    this._resetHasVoted();
+                    // Set accepting votes to false
+                    this._setJaNeinState(false);
+
+                }
+            }                
         }
     }
 
