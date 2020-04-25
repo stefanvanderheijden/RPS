@@ -1,7 +1,10 @@
 // seven player game
 
+const cardDeck = require('./carddeck');
+
 class SHGame {
     constructor(players,leanPlayerArray){
+        
         // underscore in de variabele is om aan te geven dat het private variabelen zijn
         this._players = players;
         this._hasBegun = true;
@@ -235,6 +238,10 @@ class SHGame {
 
     // This function assigns roles and ids to each player
     _initializeGame(playerarray, roledict){
+        
+        //create new card deck
+        let deck = new cardDeck();
+
         var fascists = [];
         var idmsgs = [];
         // Loop over each player

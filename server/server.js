@@ -6,6 +6,8 @@ const socketio = require('socket.io');
 const Player = require('./player')
 const RpsGame = require('./rps-game')
 const SHGame = require('./SH-game-logic')
+//const cardDeck = require('./carddeck');
+
 
 // Express library provides you with features for web and mobile application
 // Create a listener
@@ -98,7 +100,6 @@ io.on('connection', (sock) => {
             if (playerArray.length == 7 ) {
                 io.emit('message','gamestrats');
                 game = new SHGame(playerArray, leanPlayerArray);
-
                 //set first president candidate
                 game._presidentCandidate = playerArray[0];
             }
