@@ -21,12 +21,10 @@ app.use(express.static(clientPath));
 // Create the server from http object
 const server = http.createServer(app);
 
-var gameStarted = false;
 
 // Create socketio server
 const io = socketio(server);
 
-let waitingPlayer = null;
 
 // Define player array, must be filled in connection function
 var playerArray = [];
@@ -97,14 +95,18 @@ io.on('connection', (sock) => {
                 }               
             }
                 
-            if (playerArray.length == 7 ) {
-                io.emit('message','gamestrats');
+            // TODO: this function must be connected to a button
+            // TODO: if a player enters after the game object has been created either:
+            //          - send updated player array to game object (if the player enters a same name)
+            //          - reject the player from entering if the game if the name is a new name
+            if (playerArray.length == 7)  {
+                io.emit('message','Game starts');
                 game = new SHGame(playerArray, leanPlayerArray);
                 //set first president candidate
                 game._setPresidentCandidate(playerArray[0]);
                 game._startGameRound();
 
-            }
+            } 
             // Append to player array
             // use socket reconnect function?
             

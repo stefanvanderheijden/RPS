@@ -273,6 +273,7 @@ class SHGame {
                         this._resetElectionTracker();
                     } else {
                         this._sendToPlayers("The majority has voted no");
+                        this._sendVotesToClient();
                         // TODO: Assign new candidate
                         this._updateRoles();
                         // Increase election tracker by one
