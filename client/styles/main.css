@@ -5,6 +5,15 @@ body {
     background-color: #F0FFF0;
     font-size: 1.2rem;
   }
+
+#logo {
+  text-align: center;
+}
+
+#logoimg {
+  image-rendering: pixelated;
+  text-align: center; 
+}
   
 #topboxes{
     width: 70%;
