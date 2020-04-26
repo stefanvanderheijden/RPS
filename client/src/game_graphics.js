@@ -28,6 +28,7 @@ const CGadgetCanvas = HTMLCGadgetCanvas.getContext("2d")
 var VT323 = new FontFace("VT323", "https://fonts.googleapis.com/css2?family=VT323&display=swap");
 TextCanvas.font = "30px VT323";
 TextCanvas.textAlign = "center";
+TextCanvas.fillStyle = "white";
 
 CTextCanvas.font = "30px VT323";
 CTextCanvas.textAlign = "center";
@@ -104,10 +105,10 @@ chancellorCandidateIMG.src = "src/IMG/ChanCandi.png";
 
 //load yes and no images
 var YesVote = new Image();
-YesVote.src = "src/IMG/YesVote.png"
+YesVote.src = "src/IMG/HandYes.png"
 
 var NoVote = new Image();
-NoVote.src = "src/IMG/NoVote.png"
+NoVote.src = "src/IMG/HandNo.png"
 
 //load backgrounds for fascist and hitler
 var FascistBG = new Image();
@@ -168,7 +169,7 @@ function drawEmotion(emotionindex, seatnumber) {
     seat = Seats[seatnumber-1];
     //console.log(emotionindex);
     emotion = emotions[emotionindex]
-    GadgetCanvas.clearRect(seat.x+6, seat.y+6, 20, 14);
+    GadgetCanvas.clearRect(seat.x+8, seat.y+6, 20, 14);
     GadgetCanvas.drawImage(emotion, seat.x, seat.y)
 }
 
@@ -206,15 +207,15 @@ function drawVote(seatnumber,vote) {
     seat = Seats[seatnumber-1];
 
     //clear the space where the vote is displayed
-    GadgetCanvas.clearRect(seat.x+2,seat.y+36,28,4)
+    GadgetCanvas.clearRect(seat.x+2,seat.y+9,8,21)
     switch(vote) {
         case 1: 
             console.log('drawing Yes vote')
-            GadgetCanvas.drawImage(YesVote,seat.x+2,seat.y+36);
+            GadgetCanvas.drawImage(YesVote,seat.x,seat.y);
             break;
         case 0: 
             console.log('drawing No vote')
-            GadgetCanvas.drawImage(NoVote,seat.x+2,seat.y+36);
+            GadgetCanvas.drawImage(NoVote,seat.x,seat.y);
             break;
                 }
 }
@@ -222,7 +223,7 @@ function drawVote(seatnumber,vote) {
 // This function clears all the visual votes from the board
 function clearVote() {
     Seats.forEach((seat) => {
-        GadgetCanvas.clearRect(seat.x+3,seat.y+39,28,4)
+        GadgetCanvas.clearRect(seat.x+2,seat.y+9,8,21)
     });
 }
 
@@ -279,6 +280,6 @@ window.onload = function() {
 
 
 // Drawing the words on the YES and NO button on the cards area (bottom right)
-CTextCanvas.fillText("JAWOHL", 96, 80);
-CTextCanvas.fillText("NEIN", 96, 190);
+CTextCanvas.fillText("JAWOHL", 96, 96);
+CTextCanvas.fillText("NEIN", 96, 174);
 

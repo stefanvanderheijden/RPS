@@ -2,12 +2,13 @@
 
 body {
     font-family: 'VT323', monospace;
-    background-color: #F0FFF0;
+    background-color: #292323;
     font-size: 1.2rem;
   }
 
 #logo {
   text-align: center;
+  margin-top: 20px;
 }
 
 #logoimg {
@@ -20,7 +21,7 @@ body {
     margin-left: auto; margin-right: auto;
     min-width: 950px;
     margin-bottom: 20px;
-    margin-top:20px;
+    margin-top:0px;
     padding: 10px;
     height: 700px;
   }
@@ -61,26 +62,33 @@ body {
 #clickimage {
   position: absolute; left: 0; top: 0; z-index: 10;
   image-rendering: pixelated;
+  opacity: 0;
   }
 
 #rightbar {
-  border-radius: 25px;
   position: relative;
   padding: 20px;
   padding-bottom: 2px;;
   margin-left: 770px;
   flex-grow: 1;
   height: 362px;
-  background-color: #faecd1;
   width: 472px;
   }
 
+#chatboxBG {
+  position: absolute; left: 0; top: 0; z-index: 10;
+  image-rendering: pixelated;
+  z-index: -1;
+}
+
 #events {
-  height: 250px;
+  height: 210px;
   list-style: none;
   border-bottom: 1px solid lightgrey;
   overflow-y: scroll;
+  padding-top: 10px;
   padding-left: 10px;
+
   }
 
 #events li {
@@ -138,6 +146,7 @@ body {
 #BGCardsBorder {
   position: absolute; left: 0; top: 0; z-index: 10;
   image-rendering: pixelated;
+  opacity: 0;
 }
 
 #clickareamap{
