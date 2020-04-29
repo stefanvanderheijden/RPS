@@ -122,11 +122,11 @@ var CNHIMG = new Image();
 CNHIMG.src = "src/IMG/CNH.png";
 
 //Load the two types of cards (the large versions in the bottom right)
-var Fcard = new Image();
-Fcard.src = "src/IMG/Fcard.png";
+var fasCard = new Image();
+fasCard.src = "src/IMG/FasCard.png";
 
-var Lcard = new Image();
-Lcard.src = "src/IMG/Lcard.png";
+var libCard = new Image();
+libCard.src = "src/IMG/LibCard.png";
 
 //create an array of the emotion image objects
 const emotions = [emo0, emo1, emo2, emo3, emo4, emo5, emo6, emo7, emo8]
@@ -146,9 +146,9 @@ S10 = new Createseat(16,64);
 const Seats = [S1,S2,S3,S4,S5,S6,S7,S8,S9,S10];
 
 //Creating all the card locations
-C1 = new Createseat(47,4);
-C2 = new Createseat(73,7);
-C3 = new Createseat(99,7);
+C1 = new Createseat(50,15);
+C2 = new Createseat(76,15);
+C3 = new Createseat(102,15);
 
 const CardLocations = [C1,C2,C3];
 
@@ -183,11 +183,11 @@ function drawCards(cards) {
         cardLocation = CardLocations[cardNo];
         if (card == "fascist") {
             //draw a fascist card
-            CGadgetCanvas.drawImage(Fcard,cardLocation.x,cardLocation.y);
+            CGadgetCanvas.drawImage(fasCard,cardLocation.x,cardLocation.y);
 
         } else if (card == "liberal") {
             //draw a liberal card
-            CGadgetCanvas.drawImage(Lcard,cardLocation.x,cardLocation.y);
+            CGadgetCanvas.drawImage(libCard,cardLocation.x,cardLocation.y);
         }
         cardNo ++;
     });

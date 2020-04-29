@@ -94,6 +94,9 @@ sock.on("start", function(){
             console.log("drawing border")
         }
         started = true;
+        //TESTING
+        drawCards(["fascist","liberal","fascist"]);
+        //END TESTING
     });
     });
 
@@ -153,6 +156,7 @@ $("#nobutton").on("click", function(e) {
 $("#cardsbutton").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
+    clearCards();
     // Actions when clicked on the button below the cards
     });
 
@@ -175,4 +179,5 @@ $("#card3").on("click", function(e) {
     });
 
 
-// TESTING
+
+
