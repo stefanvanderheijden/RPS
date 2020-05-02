@@ -25,6 +25,9 @@ const server = http.createServer(app);
 // Create socketio server
 const io = socketio(server);
 
+// A variable to store if the game has started
+var gameStarted = false;
+
 
 // Define player array, must be filled in connection function
 var playerArray = [];
@@ -82,7 +85,13 @@ io.on('connection', (sock) => {
                         SendFullPlayerArray(player);
                         // Initiate the starting function for the new client
                         sock.emit("start");
-                    
+                        // Check if the game has started already
+                        if (gameStarted) {
+                            // The game has already been started
+                            game._updateSocket(player);
+                            game._sendToPlayers(player._getName() + '  has reconnected');
+                        }
+
                     }
                 });
                     // If entered name is unique, create new player and add to array
@@ -96,10 +105,11 @@ io.on('connection', (sock) => {
                 }               
             }
                 
-            // TODO: this function must be connected to a button
+            // TODO: this function must be connected to a button (DONE)
             // TODO: if a player enters after the game object has been created either:
             //          - send updated player array to game object (if the player enters a same name)
             //          - reject the player from entering if the game if the name is a new name
+            // TODO: if a player enters the room while the game is playing, he should not be added to the game.
 
             // Append to player array
             // use socket reconnect function?
@@ -127,6 +137,7 @@ io.on('connection', (sock) => {
         //set first president candidate
         game._setPresidentCandidate(playerArray[0]);
         game._startGameRound();
+        gameStarted = true;
     })
 
     sock.on('janein', function(data) {

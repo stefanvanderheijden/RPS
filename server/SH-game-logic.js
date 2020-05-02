@@ -24,7 +24,7 @@ class SHGame {
         this._presidentCandidate = null;
         this._chancellorCandidate = null;
         this._president = null;
-        this._chancellor = null;
+        this._chancellor = null; 
 
         // Game states - make separate class
         this._lookingForChancellor = false;
@@ -120,6 +120,22 @@ class SHGame {
         this._electionTracker = 0;
     }
 
+    _nextPresidentCandidate(){
+        var players = this._players
+        var presidentcandidate = this._getPresidentCandidate();
+        var index = players.findIndex(player => player = presidentcandidate);
+        console.log(index);
+        if (index < players.length -1) {
+            index = index + 1;
+            console.log(index);
+            console.log('index is increased by one');
+        } else {
+            console.log('index reached end of array, resetting to 0');
+            index = 0;
+        }
+        this._setPresidentCandidate(this._players[index]);
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
     // Player functions
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +197,14 @@ class SHGame {
         this._players.forEach((player) => {
             player._setHasVoted(false);
         });
+    }
+
+    _updateSocket(newPlayer) {
+
+        var player = this._getPlayerByName(newPlayer._getName());
+        var socket = newPlayer._socket;
+        player._updateSocket(socket);
+
     }
 
     _updateRoles() {
@@ -276,16 +300,25 @@ class SHGame {
                     
                     
                     if (this._getJaNeinCounter() > Math.floor(this._getNumberOfPlayers()/2)){
-                    // if (this._getJaNeinCounter() > Math.floor(1.5) ){
+                        // if (this._getJaNeinCounter() > Math.floor(1.5) ){
                         this._sendToPlayers("The majority has voted yes");
 
                         this._sendVotesToClient();
                         // TODO: CHECK #RED POLICY CARDS + CHANCELLOR IS HITLER --> IF NOT HITLER + CNH LOGO (SEPARATE FUNCTION)
                         // TODO: president and chancelllor, assign new candidate
+
+                        // set the president and chancellor to the previous candidates
+                        this._setPresident(this._getPresidentCandidate());
+                        this._setChancellor(this._getChancellorCandidate());
+
+                        // set the candidates to zero
+                        this._nextPresidentCandidate();
+                        this._setChancellorCandidate(null);
+
                         this._updateRoles();
                         this._resetElectionTracker();
                         // Set president
-                        this._setPresident(this._getPresidentCandidate());
+                        
                         // Display the three president cards
                         this._enactFirstStage();
                     
@@ -293,6 +326,9 @@ class SHGame {
                         this._sendToPlayers("The majority has voted no");
                         this._sendVotesToClient();
                         // TODO: Assign new candidate
+                        this._nextPresidentCandidate();
+                        this._setChancellorCandidate(null);
+
                         this._updateRoles();
                         // Increase election tracker by one
                         this._addToElectionTracker();
