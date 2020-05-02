@@ -46,8 +46,14 @@ function sendJaNein(jaodernein){
 // Create local playerArray to use in graphics
 var localplayerArray = [];
 
-// A variable to see if the start function has been executed
+// A variable to see if the start function has been executed (not to be confused with the gameStarted)
 var started = false;
+
+// A variable to see if the player is the host
+var host = false;
+
+// A variable to store if the game has started
+var gameStarted = false;
 
 // When refreshing the page, a prompt appears to enter the player name
 // TODO: capital letters/spelling mistakes/etc and max name length
@@ -99,6 +105,23 @@ sock.on("start", function(){
         //END TESTING
     });
     });
+
+sock.on("host", function(){
+    // This function sets the player up to be the host of the game
+    // The host is able to:
+    // - Start the game (TODO)
+    // - Reset the server (TODO)
+
+    // Set the host variable to true
+    host = true;
+
+    writeEvent("You are the host of this game.")
+
+    drawButton("Start Game!")
+
+    // Draw the Start button on the card canvas
+    // Set the button to start the game
+});    
 
 sock.on('emotionUpdating', function(data) {
     drawEmotion(data.emotion, data.seatnr);
@@ -156,7 +179,17 @@ $("#nobutton").on("click", function(e) {
 $("#cardsbutton").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
-    clearCards();
+    
+    // check if this clien is the host
+    if (host) {
+        //check if the game has not yet started
+        if (!gameStarted) {
+            sock.emit('gameStarts');
+            gameStarted = true;
+            drawButton(' ');
+        }
+    }
+
     // Actions when clicked on the button below the cards
     });
 

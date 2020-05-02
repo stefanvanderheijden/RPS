@@ -41,7 +41,7 @@ function UpdatePlayerArray(player) {
 }
 
 function SendFullPlayerArray(player) {
-    //send the full array to the new play er, so he has all the info
+    //send the full array to the new player, so he has all the info
     player._socket.emit("getPlayerArray",leanPlayerArray);
 
 }
@@ -66,7 +66,8 @@ io.on('connection', (sock) => {
                 SendFullPlayerArray(player_tmp);
                 // Initiate the starting function for the new client
                 sock.emit("start");
-                // Send the full player array list to the new client
+                // This is the first player in the array, so this player is the host.
+                sock.emit("host");
 
             } else {
                 // If playerarray is nonzero length, first check if given name already exists
@@ -99,14 +100,7 @@ io.on('connection', (sock) => {
             // TODO: if a player enters after the game object has been created either:
             //          - send updated player array to game object (if the player enters a same name)
             //          - reject the player from entering if the game if the name is a new name
-            if (playerArray.length == 7)  {
-                io.emit('message','Game starts');
-                game = new SHGame(playerArray, leanPlayerArray);
-                //set first president candidate
-                game._setPresidentCandidate(playerArray[0]);
-                game._startGameRound();
 
-            } 
             // Append to player array
             // use socket reconnect function?
             
@@ -126,6 +120,14 @@ io.on('connection', (sock) => {
             game._voting(data.name,data.vote);
         }
     });
+
+    sock.on('gameStarts', () => {
+        io.emit('message','Game starts');
+        game = new SHGame(playerArray, leanPlayerArray);
+        //set first president candidate
+        game._setPresidentCandidate(playerArray[0]);
+        game._startGameRound();
+    })
 
     sock.on('janein', function(data) {
         if (typeof game != "undefined") {

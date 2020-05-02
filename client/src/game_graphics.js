@@ -193,6 +193,12 @@ function drawCards(cards) {
     });
 }
 
+function drawButton(text) {
+    // in the CTextCanvas all the coordinates have to be multiplied by 4
+    CTextCanvas.clearRect(66*4,42*4,36*4,12*4);
+    CTextCanvas.fillText(text, 85*4, 50*4);
+}
+
 function clearCards() {
     CGadgetCanvas.clearRect(47,7,78,37);
 }
