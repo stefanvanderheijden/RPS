@@ -140,7 +140,7 @@ sock.on("votesUpdate", function(votesArray) {
         drawVote(vote[0], vote[1]);
     });
     // clear the votes after 3 seconds
-    setTimeout(clearVote, 3000)
+    setTimeout(clearVote, 3000);
     
 });
     
