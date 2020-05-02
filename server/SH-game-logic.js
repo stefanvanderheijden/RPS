@@ -22,7 +22,7 @@ class SHGame {
         this._presidentCandidate = null;
         this._chancellorCandidate = null;
         this._president = null;
-        this._chancellor = null;
+        this._chancellor = null; 
 
         // Game states - make separate class
         this._lookingForChancellor = false;
@@ -168,6 +168,14 @@ class SHGame {
         this._players.forEach((player) => {
             player._setHasVoted(false);
         });
+    }
+
+    _updateSocket(newPlayer) {
+
+        var player = this._getPlayerByName(newPlayer._getName());
+        var socket = newPlayer._socket;
+        player._updateSocket(socket);
+
     }
 
     _updateRoles() {

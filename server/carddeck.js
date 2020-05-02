@@ -65,7 +65,7 @@ class cardDeck {
         return cards;
     }
 
-        _drawOneCard() {
+    _drawOneCard() {
         this._checkEmptyDeck();
         var card = this._deck.pop();
         return card;
