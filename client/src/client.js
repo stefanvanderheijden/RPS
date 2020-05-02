@@ -2,6 +2,7 @@
 // Ik kreeg foutmeldingen totdat ik onderstaande regel commenteerde???
 //import { Socket } from "dgram";
 
+
 const writeEvent = (text) => {
     // <ul> element, defined in index.html. ul = unordered list
     const parent = document.querySelector('#events');
@@ -134,9 +135,13 @@ sock.on("rolesUpdate", function(leanPlayerArray) {
 });
 
 sock.on("votesUpdate", function(votesArray) {
+    // Draw the votes
     votesArray.forEach((vote) => {
         drawVote(vote[0], vote[1]);
     });
+    // clear the votes after 3 seconds
+    setTimeout(clearVote, 3000)
+    
 });
     
 

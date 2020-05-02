@@ -12,7 +12,7 @@ class SHGame {
         this._sendToPlayers('Secret hitler starts!');
         
         // Dependent on number of players
-        this._numberOfPlayers = 7;
+        this._numberOfPlayers = 3;
         var rolesIds7p = ['Hitler' , 'Fascist' , 'Fascist', 'Liberal' , 'Liberal' , 'Liberal' , 'Liberal'];
 
         // Initialize game
@@ -105,6 +105,22 @@ class SHGame {
 
     _resetElectionTracker(){
         this._electionTracker = 0;
+    }
+
+    _nextPresidentCandidate(){
+        var players = this._players
+        var presidentcandidate = this._getPresidentCandidate();
+        var index = players.findIndex(player => player = presidentcandidate);
+        console.log(index);
+        if (index < players.length -1) {
+            index = index + 1;
+            console.log(index);
+            console.log('index is increased by one');
+        } else {
+            console.log('index reached end of array, resetting to 0');
+            index = 0;
+        }
+        this._setPresidentCandidate(this._players[index]);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -271,18 +287,31 @@ class SHGame {
                     
                     
                     if (this._getJaNeinCounter() > Math.floor(this._getNumberOfPlayers()/2)){
-                    // if (this._getJaNeinCounter() > Math.floor(1.5) ){
+                        // if (this._getJaNeinCounter() > Math.floor(1.5) ){
                         this._sendToPlayers("The majority has voted yes");
 
                         this._sendVotesToClient();
                         // TODO: CHECK #RED POLICY CARDS + CHANCELLOR IS HITLER --> IF NOT HITLER + CNH LOGO (SEPARATE FUNCTION)
                         // TODO: president and chancelllor, assign new candidate
+
+                        // set the president and chancellor to the previous candidates
+                        this._president = this._presidentCandidate;
+                        this._chancellor = this._chancellorCandidate;
+
+                        // set the candidates to zero
+                        this._setPresidentCandidate(null);
+                        this._setChancellorCandidate(null);
+
                         this._updateRoles();
                         this._resetElectionTracker();
+
                     } else {
                         this._sendToPlayers("The majority has voted no");
                         this._sendVotesToClient();
                         // TODO: Assign new candidate
+                        this._nextPresidentCandidate();
+                        this._setChancellorCandidate(null);
+
                         this._updateRoles();
                         // Increase election tracker by one
                         this._addToElectionTracker();

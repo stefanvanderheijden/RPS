@@ -175,7 +175,7 @@ function drawEmotion(emotionindex, seatnumber) {
 
 function drawCards(cards) {
     //clear a rectangle on the canvas
-    
+
     //draw the cards that have been passed.
     cardNo = 0;
 
