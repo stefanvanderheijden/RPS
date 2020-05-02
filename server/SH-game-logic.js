@@ -12,7 +12,7 @@ class SHGame {
         this._sendToPlayers('Secret hitler starts!');
         
         // Dependent on number of players
-        this._numberOfPlayers = 3;
+        this._numberOfPlayers = 7;
         var rolesIds7p = ['Hitler' , 'Fascist' , 'Fascist', 'Liberal' , 'Liberal' , 'Liberal' , 'Liberal'];
 
         // Initialize game
