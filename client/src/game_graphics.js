@@ -175,7 +175,7 @@ function drawEmotion(emotionindex, seatnumber) {
 
 function drawCards(cards) {
     //clear a rectangle on the canvas
-    
+    CGadgetCanvas.clearRect(47,12,75,29);
     //draw the cards that have been passed.
     cardNo = 0;
 

@@ -33,6 +33,10 @@ class Player {
         this._socket.emit("votesUpdate", votesArray);
     }
 
+    _sendPresidentCards(cardsarray){
+        this._socket.emit("drawCards", cardsarray)
+    }
+
     _assignIdentity(identity) {
         this._identity = identity;
         // Base the party on the given ID

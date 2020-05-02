@@ -12,11 +12,13 @@ class SHGame {
         this._sendToPlayers('Secret hitler starts!');
         
         // Dependent on number of players
-        this._numberOfPlayers = 7;
+        this._numberOfPlayers = 3;
         var rolesIds7p = ['Hitler' , 'Fascist' , 'Fascist', 'Liberal' , 'Liberal' , 'Liberal' , 'Liberal'];
 
         // Initialize game
+        this._deck = null;
         this._initializeGame(this._players, rolesIds7p)
+        
 
         // The variables are filled with the player objects
         this._presidentCandidate = null;
@@ -27,6 +29,7 @@ class SHGame {
         // Game states - make separate class
         this._lookingForChancellor = false;
         this._janeinState = false;
+        this._presidentCardSelection = false;
         
         // Vote counters
         this._jaNeinCounter = 0;
@@ -41,6 +44,9 @@ class SHGame {
     // Game states
     //////////////////////////////////////////////////////////////////////////////////////////////
  
+    _setDeck(deck){
+        this._deck = deck;
+    }
 
     _getNumberOfPlayers(){
         return this._numberOfPlayers;
@@ -65,6 +71,13 @@ class SHGame {
         }
         else if (bool == false){
             this._sendToPlayers("Sie konnte nicht mehr stimmen");
+        }
+    }
+
+    _setPresidentCardSelectionState (bool) {
+        this._presidentCardSelection = bool;
+        if (bool == true) {
+            this._getPresident()._sendToPlayer("Discard one card");
         }
     }
 
@@ -271,6 +284,11 @@ class SHGame {
                         // TODO: president and chancelllor, assign new candidate
                         this._updateRoles();
                         this._resetElectionTracker();
+                        // Set president
+                        this._setPresident(this._getPresidentCandidate());
+                        // Display the three president cards
+                        this._enactFirstStage();
+                    
                     } else {
                         this._sendToPlayers("The majority has voted no");
                         this._sendVotesToClient();
@@ -291,8 +309,6 @@ class SHGame {
                     this._resetHasVoted();
                     // Set accepting votes to false
                     this._setJaNeinState(false);
-                    // Enter policy selection state
-                    // this._setPolicySelection(true);
 
                 }
             }  else {
@@ -301,6 +317,8 @@ class SHGame {
         } else {
         }
     }
+
+
 
     _sendToPlayers(msg) {
        this._players.forEach((player) => {
@@ -313,6 +331,7 @@ class SHGame {
         
         //create new card deck
         let deck = new cardDeck();
+        this._setDeck(deck);
 
         var fascists = [];
         var idmsgs = [];
@@ -356,6 +375,12 @@ class SHGame {
         this._players.forEach((player) => {
             player._updateVotes(votes) ;
         });
+    }
+
+    _enactFirstStage(){
+        this._getPresident()._sendPresidentCards(this._deck._drawThreeCards());
+        // Set gamestate so that the card voting message is processed
+        this._setPresidentCardSelectionState(true);
     }
 }
 

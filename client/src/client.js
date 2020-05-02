@@ -138,6 +138,11 @@ sock.on("votesUpdate", function(votesArray) {
         drawVote(vote[0], vote[1]);
     });
 });
+
+sock.on("drawCards", function(cardsArray) {
+    drawCards(cardsArray);
+});
+
     
 
 document

@@ -6,7 +6,7 @@ const socketio = require('socket.io');
 const Player = require('./player')
 const RpsGame = require('./rps-game')
 const SHGame = require('./SH-game-logic')
-//const cardDeck = require('./carddeck');
+// const cardDeck = require('./carddeck');
 
 
 // Express library provides you with features for web and mobile application
@@ -59,7 +59,7 @@ io.on('connection', (sock) => {
             // If player array is empty, immediately add new player
             if (playerArray.length == 0){
                 // Create tmp player object and add to array
-                let player_tmp = new Player(personName,1, sock)
+                let player_tmp = new Player(personName,1, sock);
                 // Send this new player to all clients
                 UpdatePlayerArray(player_tmp);
                 // Send the full player array list to the new client

@@ -5,7 +5,7 @@ class cardDeck {
        
         //Determine nr of type of cards
         this._nrLibCards = 6;
-        this._nrFasCards = 11;
+        this._nrFasCards = 13;
 
         //create cards variables
         this._FCard = "fascist"
@@ -18,28 +18,35 @@ class cardDeck {
     }
 
     _shuffleCards() {
-            let count = this._deck.length;
-            while(count) {
-               this._deck.push(this._deck.splice(Math.floor(Math.random() * count), 1)[0]);
-               count -= 1;
+            // for 1000 turns
+            // switch the values of two random cards
+            for (var i = 0; i < 1000; i++)
+            {
+                var location1 = Math.floor((Math.random() * this._deck.length));
+                var location2 = Math.floor((Math.random() * this._deck.length));
+                var tmp = this._deck[location1];
+
+                this._deck[location1] = this._deck[location2];
+                this._deck[location2] = tmp;
             }
-            }
+        }
 
     _createDeck(nrLibCards,nrFasCards) {
     //clear the deck
         var tempdeck = [];
         var i = 0;
         for (i = 0; i < nrLibCards; i++) {
-            tempdeck.push(this._Lcard);
+            tempdeck.push(this._LCard);
             }
         i = 0;
         for (i = 0; i < nrFasCards; i++) {
-            tempdeck.push(this._Fcard);
-            }
-        this._shuffleCards();  
+            tempdeck.push(this._FCard);
+            } 
         
         this._deck = tempdeck;
-            }
+
+        this._shuffleCards(); 
+        }
 
     _checkEmptyDeck() {
         if (this._deck.length == 0) {
@@ -59,13 +66,13 @@ class cardDeck {
         var card2 = this._deck.pop();
         this._checkEmptyDeck();
         var card3 = this._deck.pop();
-
+        
         var cards = [card1,card2,card3];
 
         return cards;
     }
 
-        _drawOneCard() {
+    _drawOneCard() {
         this._checkEmptyDeck();
         var card = this._deck.pop();
         return card;
