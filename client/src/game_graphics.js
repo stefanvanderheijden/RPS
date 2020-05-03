@@ -25,12 +25,12 @@ const CTextCanvas = HTMLCTextCanvas.getContext("2d")
 const HTMLCGadgetCanvas = document.getElementById("cards-gadget-canvas")
 const CGadgetCanvas = HTMLCGadgetCanvas.getContext("2d")
 
-var VT323 = new FontFace("VT323", "https://fonts.googleapis.com/css2?family=VT323&display=swap");
-TextCanvas.font = "30px VT323";
+var VT323 = new FontFace("Press Start 2P", "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+TextCanvas.font = "60px Press Start 2P";
 TextCanvas.textAlign = "center";
 TextCanvas.fillStyle = "white";
 
-CTextCanvas.font = "30px VT323";
+CTextCanvas.font = "60px Press Start 2P";
 CTextCanvas.textAlign = "center";
 
 class Createseat {

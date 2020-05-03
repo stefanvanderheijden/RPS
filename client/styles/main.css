@@ -1,41 +1,101 @@
-@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 body {
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', cursive;
     background-color: #292323;
-    font-size: 1.2rem;
+    font-size: 0.5rem;
+    display: flex;
+    margin-left: auto; margin-right: auto;
   }
 
 #logo {
-  text-align: center;
   margin-top: 20px;
 }
 
 #logoimg {
   image-rendering: pixelated;
-  text-align: center; 
 }
   
 #topboxes{
-    width: 70%;
+    width: 90%;
     margin-left: auto; margin-right: auto;
-    min-width: 950px;
-    margin-bottom: 20px;
-    margin-top:0px;
-    padding: 10px;
-    height: 700px;
+
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: center;
 
   }
 
 #stage{
-  float: left;
+  margin-top: 30px;
+  display: flex;
+  align-content: center;
   width: 736px;
   height: 672px;
   position: relative;
+  order: 1;
 
+  flex-grow: 4;
+  flex-shrink: 0;
+  display: flex;
+
+  margin-left: 5px;
+  margin-right: 5px;
   }
 
+#rightbar {
+  margin-top: 30px;
+  display: flex;
+  margin-left: 5px;
+  margin-right: 5px;
+  position: relative;
+  order: 2;
+  height: 672px;
+  width: 512px;
+
+  flex-grow: 4;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: right;
+  
+  }
+
+#righttop {
+  height: 364px;
+  width: 512px;
+
+  order: 1;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+  
+#rightbottom {
+  width: 512px;
+  height: 256px;
+  /* position: absolute; left: 0; top: 0; z-index: 0; */
+  order: 4;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
 #bg-canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   width: 736px;
   height: 672px;
   image-rendering: pixelated;
@@ -43,6 +103,11 @@ body {
   }
 
 #char-canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   width: 736px;
   height: 672px;
   image-rendering: pixelated;
@@ -51,12 +116,22 @@ body {
   }
 
 #gadget-canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   width: 736px;
   height: 672px;
   image-rendering: pixelated;
   position: absolute; left: 0; top: 0; z-index: 2;
   }
 #text-canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   image-rendering: pixelated;
   position: absolute; left: 0; top: 0; z-index: 3;
   }
@@ -67,86 +142,103 @@ body {
   opacity: 0;
   }
 
-#rightbar {
-  position: relative;
-  padding: 20px;
-  padding-bottom: 2px;;
-  margin-left: 770px;
-  flex-grow: 1;
-  height: 362px;
-  width: 472px;
-  }
-
 #chatboxBG {
-  position: absolute; left: 0; top: 0; z-index: 10;
+  position: absolute; left: 1; top: 0; z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
   image-rendering: pixelated;
   z-index: -1;
+
 }
 
-#events {
-  height: 210px;
-  list-style: none;
-  border-bottom: 1px solid lightgrey;
-  overflow-y: scroll;
-  padding-top: 10px;
-  padding-left: 10px;
 
+
+#events {
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  height: 230px;
+  list-style: none;
+  overflow-y: scroll;
+
+
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   }
 
 #events li {
-  padding: 0px 10px 0px opx;
+  padding: 4px 0px 0px 0px;
   }
 
 .chat-wrapper {
   display: flex;
-  margin-left: 0px; margin-right: 0px;
   justify-content: center;
-  margin-bottom: 100px;
+
   }
    
 .chat-wrapper form input {
-  flex: 1;
-  width: 200px;
+  order: 1;
   }
     
 .chat-wrapper form button {
-  flex: 2;
+  order: 2;
   }
 
-#cardsstage{
-    float: left;
-    width: 512px;
-    height: 256px;
-    position: relative;
+#cardstage{
 
-    }
+  width: 512px;
+  height: 256px;
+
+  position: absolute;
+
+
+
+  order: 2;
+}
 
 #cards-gadget-canvas {
   width: 512px;
   height: 256px;
   image-rendering: pixelated;
-  position: absolute; left: 0; top: 0; z-index: 1;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   }
 
 #cards-text-canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   image-rendering: pixelated;
-  position: absolute; left: 0; top: 0; z-index: 2;
+
   }
 
-#rightbottom {
-  margin-top: 416px;
-  width: 512px;
-  height: 256px;
-  position: absolute; left: 0; top: 0; z-index: 0;
-}
+
 
 #BGCards {
-  position: absolute; left: 0; top: 0; z-index: 0;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 0;
   image-rendering: pixelated;
 }
 
 #BGCardsBorder {
-  position: absolute; left: 0; top: 0; z-index: 10;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  position: absolute; center: 0; top: 0; z-index: 10;
   image-rendering: pixelated;
   opacity: 0;
 }
@@ -182,8 +274,7 @@ button:hover {
   width: 60%;
   margin-left: auto; margin-right: auto;
   min-width: 950px;
-  outline: none;
-  border-color: blue;
+ 
 }
 
    button.turn:hover {
