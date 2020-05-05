@@ -2,6 +2,7 @@
 // Ik kreeg foutmeldingen totdat ik onderstaande regel commenteerde???
 //import { Socket } from "dgram";
 
+var person = ''
 
 const writeEvent = (text) => {
     // <ul> element, defined in index.html. ul = unordered list
@@ -74,10 +75,10 @@ var gameStarted = false;
 // TODO: capital letters/spelling mistakes/etc and max name length
 // TODO: make separate function that automatically sends to server
 
-var person = null;
+
 
 // Send playername to server
-sock.emit('playername',person)
+
 
 // Subscribe to message topic
 sock.on('message', writeEvent);
@@ -231,16 +232,15 @@ $(document).ready(function() {
             modal: true,
             autoOpen: true,
             position:pos,
-             buttons: {
-                 "Close ": function() {
-                  $( this ).dialog( "close" );
-                  },
+            buttons: {
                  "Submit ": function(){
-                 $('#msg').html($("#f1").serialize());
-                 $( this ).dialog( "close" );
+                    var person = this.person;
+                    var person = $("#t1").val();
+                    //var person = "jaapie"
+                    sock.emit('playername',person)
+                    $( this ).dialog( "close" );
                  }
                }
-                    });
+    });
     });
     })
-
