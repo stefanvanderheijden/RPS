@@ -4,7 +4,6 @@ body {
     font-family: 'Press Start 2P', cursive;
     background-color: #292323;
     font-size: 0.5rem;
-    display: flex;
     margin-left: auto; margin-right: auto;
   }
 
@@ -78,7 +77,6 @@ body {
 #rightbottom {
   width: 512px;
   height: 256px;
-  /* position: absolute; left: 0; top: 0; z-index: 0; */
   order: 4;
   flex-grow: 0;
   flex-shrink: 0;
@@ -132,11 +130,15 @@ body {
   margin-right: auto;
   left: 0;
   right: 0;
-  image-rendering: pixelated;
   position: absolute; left: 0; top: 0; z-index: 3;
   }
 
 #clickimage {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   position: absolute; left: 0; top: 0; z-index: 10;
   image-rendering: pixelated;
   opacity: 0;
@@ -217,6 +219,8 @@ body {
   right: 0;
   image-rendering: pixelated;
 
+  z-index: 10;
+
   }
 
 
@@ -267,7 +271,7 @@ button {
   }
 
 button:hover {
-      background-color: #79d7e4;
+      background-color: #0e717e;
   }
 
 #bottomboxes {
@@ -365,3 +369,32 @@ button:hover {
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+  .ui-dialog-titlebar-close {
+    visibility: hidden;
+}
+
+.ui-widget-overlay
+{
+  opacity: .50 !important; /* Make sure to change both of these, as IE only sees the second one */
+  filter: Alpha(Opacity=50) !important;
+
+  background: rgb(50, 50, 50) !important; /* This will make it darker */
+  z-index: 10;
+}
+
+  .ui-dialog{
+    padding: 500px;
+
+    z-index: 20;
+    background-color: #292323;
+
+    overflow: auto;
+    z-index: 10;
+
+}
+  #my_dialog {
+    width: 800px;
+    background-color: cyan;
+    z-index: 10;
+  }

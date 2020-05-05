@@ -43,6 +43,20 @@ function sendJaNein(jaodernein){
     sock.emit('janein', {name: person, vote: jaodernein});
 };
 
+function startingSequence() {
+    localplayerArray.forEach((player) => {
+        drawName(player.name,player.seatnr);
+        console.log("drawing player "+ player.name);
+        drawEmotion(player.emotion, player.seatnr);
+
+        // For the clients own name, also draw a border.
+        if (player.name == person) {
+            myseatnr = player.seatnr;
+            drawBorder(player.seatnr);
+            console.log("drawing border")
+        }
+    });
+}
 
 // Create local playerArray to use in graphics
 var localplayerArray = [];
@@ -59,7 +73,8 @@ var gameStarted = false;
 // When refreshing the page, a prompt appears to enter the player name
 // TODO: capital letters/spelling mistakes/etc and max name length
 // TODO: make separate function that automatically sends to server
-var person = prompt("Please enter your name:", "name");
+
+var person = null;
 
 // Send playername to server
 sock.emit('playername',person)
@@ -88,24 +103,12 @@ sock.on('getPlayerArray', function(playerarray) {
 
 // These things are done when the socket is initialized.
 sock.on("start", function(){
-    //when the socket is first started, it should draw ALL names of the players
-    localplayerArray.forEach((player) => {
-        drawName(player.name,player.seatnr);
-        console.log("drawing player "+ player.name);
-        drawEmotion(player.emotion, player.seatnr);
+    // Wait for a second before drawing stuff, to give the images a chance to load
+    setTimeout(startingSequence, 1000);
+    started = true;
 
-        // For the clients own name, also draw a border.
-        if (player.name == person) {
-            myseatnr = player.seatnr;
-            drawBorder(player.seatnr);
-            console.log("drawing border")
-        }
-        started = true;
-        //TESTING
-        drawCards(["fascist","liberal","fascist"]);
-        //END TESTING
     });
-    });
+
 
 sock.on("host", function(){
     // This function sets the player up to be the host of the game
@@ -221,6 +224,23 @@ $("#card3").on("click", function(e) {
     // Actions when clicked on the THIRD CARD
     });
 
-
-
+$(document).ready(function() {
+    $(function() {
+        var pos = { my: "center center", at: "center top+350", of: window };
+        $( "#my_dialog" ).dialog({
+            modal: true,
+            autoOpen: true,
+            position:pos,
+             buttons: {
+                 "Close ": function() {
+                  $( this ).dialog( "close" );
+                  },
+                 "Submit ": function(){
+                 $('#msg').html($("#f1").serialize());
+                 $( this ).dialog( "close" );
+                 }
+               }
+                    });
+    });
+    })
 
