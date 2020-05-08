@@ -4,47 +4,50 @@ body {
     font-family: 'Press Start 2P', cursive;
     background-color: #292323;
     font-size: 0.5rem;
-    margin-left: auto; margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+
   }
 
 #logo {
   margin-top: 20px;
+
+
 }
 
 #logoimg {
   image-rendering: pixelated;
+
 }
   
 #topboxes{
-    width: 90%;
-    margin-left: auto; margin-right: auto;
-
+    width: 100%;
     display: flex;
     flex-shrink: 0;
     flex-wrap: wrap;
     justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
 
   }
 
 #stage{
-  margin-top: 30px;
+  justify-content: center;
+  margin-top: 50px;
   display: flex;
   align-content: center;
   width: 736px;
   height: 672px;
   position: relative;
   order: 1;
-
-  flex-grow: 4;
+  flex-grow: 0;
   flex-shrink: 0;
-  display: flex;
 
-  margin-left: 5px;
-  margin-right: 5px;
   }
 
 #rightbar {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   margin-left: 5px;
   margin-right: 5px;
@@ -53,11 +56,11 @@ body {
   height: 672px;
   width: 512px;
 
-  flex-grow: 4;
+  flex-grow: 0;
   flex-shrink: 0;
-  flex-wrap: wrap;
-  justify-content: right;
-  
+  flex-wrap: wrap;  
+
+
   }
 
 #righttop {
@@ -68,8 +71,8 @@ body {
   flex-grow: 0;
   flex-shrink: 0;
 
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
 }
@@ -80,18 +83,20 @@ body {
   order: 4;
   flex-grow: 0;
   flex-shrink: 0;
+  margin-top: 50px;
 
-
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
 }
 
 #bg-canvas {
+  flex-grow: 0;
+  flex-shrink: 0;
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
   width: 736px;
@@ -102,8 +107,8 @@ body {
 
 #char-canvas {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
   width: 736px;
@@ -115,8 +120,8 @@ body {
 
 #gadget-canvas {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
   width: 736px;
@@ -126,8 +131,8 @@ body {
   }
 #text-canvas {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
   position: absolute; left: 0; top: 0; z-index: 3;
@@ -135,8 +140,8 @@ body {
 
 #clickimage {
   position: absolute;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   left: 0;
   right: 0;
   position: absolute; left: 0; top: 0; z-index: 10;
@@ -153,8 +158,6 @@ body {
 
 }
 
-
-
 #events {
   margin-top: 50px;
   margin-left: 20px;
@@ -162,8 +165,6 @@ body {
   height: 230px;
   list-style: none;
   overflow-y: scroll;
-
-
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -177,10 +178,11 @@ body {
 .chat-wrapper {
   display: flex;
   justify-content: center;
-
+  padding-bottom:60px;
   }
    
 .chat-wrapper form input {
+  max-width: 200px;
   order: 1;
   }
     
@@ -192,11 +194,7 @@ body {
 
   width: 512px;
   height: 256px;
-
   position: absolute;
-
-
-
   order: 2;
 }
 
@@ -253,16 +251,16 @@ body {
 
 input {
   font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
   outline: none;
-  font-size: 1rem;
   }
 
 button {
     font-family: 'Press Start 2P', monospace;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: white;
     line-height: 25px;
-    background-color: #00bcd4;
+    background-color:DarkRed ;
     border: none;
     border-radius: 2px;
     cursor: pointer;
@@ -278,22 +276,20 @@ button:hover {
   width: 70%;
   margin-left: auto; margin-right: auto;
   min-width: 950px;
- 
-}
+ }
 
    button.turn:hover {
     background-color: whitesmoke;
   }
   
   .rps-wrapper {
-
     background-color: bisque;
   }
   
  
   .button-wrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 
   }
 
@@ -320,11 +316,10 @@ button:hover {
 
   /* Dropdown Button */
   .dropbtn {
-    font-family: 'VT323', monospace;
-    font-size: 1.5rem;
+    font-family: 'Press Start 2P', monospace;
     color: white;
     line-height: 25px;
-    background-color: #00bcd4;
+    background-color:DarkRed ;
     border: none;
     border-radius: 2px;
     cursor: pointer;
@@ -384,17 +379,25 @@ button:hover {
 }
 
   .ui-dialog{
-    padding: 500px;
-
+    min-width: 600px;
+    min-height: 400px;
+    padding-top: 100px;
+    padding-left:100px;
+    padding-right:100px;
+    padding-bottom: 100px;
+    text-align: center;
     z-index: 20;
     background-color: #292323;
-
-    overflow: auto;
     z-index: 10;
-
+    border-style: dotted;
+    border-radius: 30px;
 }
   #my_dialog {
-    width: 800px;
+    margin: 10px;
+    padding:50px;
+    text-align: center;
+    min-width: 350px;
     background-color: cyan;
     z-index: 10;
+    border-radius: 30px;
   }

@@ -158,6 +158,7 @@ document
     .querySelector('#chat-form')
     .addEventListener('submit', onFormSubmitted);
 
+
 const areas = ["#p1area","#p2area","#p3area","#p4area","#p5area","#p6area","#p7area","#p8area","#p9area","#p10area"]
 
 areas.forEach((area) => {
@@ -233,9 +234,8 @@ $(document).ready(function() {
             autoOpen: true,
             position:pos,
             buttons: {
-                 "Submit ": function(){
-                    var person = this.person;
-                    var person = $("#t1").val();
+                 "+  Join game  +": function(){
+                    person = $("#t1").val();
                     //var person = "jaapie"
                     sock.emit('playername',person)
                     $( this ).dialog( "close" );
@@ -244,3 +244,13 @@ $(document).ready(function() {
     });
     });
     })
+
+$('#my_dialog').keypress(function(e) {
+    if (e.keyCode == $.ui.keyCode.ENTER) {
+        person = $("#t1").val();
+        //var person = "jaapie"
+        sock.emit('playername',person)
+        $( this ).dialog( "close" );
+        e.preventDefault();
+    }
+});
