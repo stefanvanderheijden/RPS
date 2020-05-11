@@ -59,7 +59,7 @@ io.on('connection', (sock) => {
             // Send to general chat
             io.emit('message', personName+' has entered the game');
             
-            // If player array is empty, immediately add new player
+            // If player array is empty, i mmediately add new player
             if (playerArray.length == 0){
                 // Create tmp player object and add to array
                 let player_tmp = new Player(personName,1, sock);
