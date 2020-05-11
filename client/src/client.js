@@ -99,7 +99,7 @@ sock.on('clientArrayUpdate', function(player) {
 
 sock.on('getPlayerArray', function(playerarray) {
     localplayerArray = playerarray;
-    console.log("received new player array")
+    console.log("received updated player array")
 });
 
 // These things are done when the socket is initialized.

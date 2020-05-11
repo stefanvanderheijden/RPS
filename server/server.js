@@ -43,10 +43,32 @@ function UpdatePlayerArray(player) {
     io.emit('clientArrayUpdate', leanPlayer)
 }
 
-function SendFullPlayerArray(player) {
+function SendFullPlayerArrayToPlayer(player) {
     //send the full array to the new player, so he has all the info
     player._socket.emit("getPlayerArray",leanPlayerArray);
 
+}
+
+function SendFullPlayerArrayToAllPlayers() {
+    // clear the lean existing player array
+    leanPlayerArray = [];
+
+    // go through all the players in the 'real' player array
+    playerArray.forEach((player) => {
+
+        // create a lean player from each player
+        leanPlayer = {name : player._name, seatnr : player._seatnr, identity : player._identity, party : player._party, emotion : 0, role : player._role};
+
+        // add this player to the lean player array
+        leanPlayerArray.push(leanPlayer);
+        
+    });
+
+    //send this new lean player array to all the players
+    playerArray.forEach((player) => {
+        player._socket.emit("getPlayerArray",leanPlayerArray);
+    });
+    
 }
 
 function SendToAllPlayers(message) {
@@ -66,7 +88,7 @@ io.on('connection', (sock) => {
                 // Send this new player to all clients
                 UpdatePlayerArray(player_tmp);
                 // Send the full player array list to the new client
-                SendFullPlayerArray(player_tmp);
+                SendFullPlayerArrayToPlayer(player_tmp);
                 // Initiate the starting function for the new client
                 sock.emit("start");
                 // This is the first player in the array, so this player is the host.
@@ -82,7 +104,7 @@ io.on('connection', (sock) => {
                         playerExists = true;
                         sock.emit("message", "Welkom back "+ personName);
                         // The client needs to get the full array of players because he reloaded
-                        SendFullPlayerArray(player);
+                        SendFullPlayerArrayToPlayer(player);
                         // Initiate the starting function for the new client
                         sock.emit("start");
                         // Check if the game has started already
@@ -99,7 +121,7 @@ io.on('connection', (sock) => {
                     let player_tmp = new Player(personName,playerArray.length+1, sock);
                     UpdatePlayerArray(player_tmp);
                     // Send the full player array list to the new client
-                    SendFullPlayerArray(player_tmp);
+                    SendFullPlayerArrayToPlayer(player_tmp);
                     //Initiate the starting function for the new client
                     sock.emit("start");
                 }               
@@ -138,6 +160,7 @@ io.on('connection', (sock) => {
         game._setPresidentCandidate(playerArray[0]);
         game._startGameRound();
         gameStarted = true;
+        SendFullPlayerArrayToAllPlayers();
     })
 
     sock.on('janein', function(data) {
