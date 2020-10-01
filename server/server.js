@@ -126,15 +126,6 @@ io.on('connection', (sock) => {
                     sock.emit("start");
                 }               
             }
-                
-            // TODO: this function must be connected to a button (DONE)
-            // TODO: if a player enters after the game object has been created either:
-            //          - send updated player array to game object (if the player enters a same name)
-            //          - reject the player from entering if the game if the name is a new name
-            // TODO: if a player enters the room while the game is playing, he should not be added to the game.
-
-            // Append to player array
-            // use socket reconnect function?
             
         });
 
