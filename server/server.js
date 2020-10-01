@@ -156,6 +156,12 @@ io.on('connection', (sock) => {
         });
         
     });
+
+    sock.on('cardSelection',function(data) {
+        if (typeof game != "undefined") {
+            game._cardSelection(data.name,data.card);
+            }
+    });
 });
 
 // Output error message if server crashes

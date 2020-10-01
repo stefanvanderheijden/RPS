@@ -207,6 +207,8 @@ $("#card1").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
     // Actions when clicked on the FIRST CARD
+    msg = {name: person, card: 1};
+    sock.emit('cardSelection',msg);
     });
 
 $("#card2").on("click", function(e) {

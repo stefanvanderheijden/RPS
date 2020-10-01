@@ -413,8 +413,9 @@ class SHGame {
         });
     }
 
+    // First stage of policy enaction, three cards are send to president
     _enactFirstStage(){
-        this._getPresident()._sendPresidentCards(this._deck._drawThreeCards());
+        this._getPresident()._sendCards(this._deck._drawThreeCards());
         // Set gamestate so that the card voting message is processed
         this._setPresidentCardSelectionState(true);
     }

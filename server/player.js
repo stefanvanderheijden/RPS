@@ -33,7 +33,7 @@ class Player {
         this._socket.emit("votesUpdate", votesArray);
     }
 
-    _sendPresidentCards(cardsarray){
+    _sendCards(cardsarray){
         this._socket.emit("drawCards", cardsarray)
     }
 
