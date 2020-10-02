@@ -107,7 +107,6 @@ sock.on("start", function(){
     // Wait for a second before drawing stuff, to give the images a chance to load
     setTimeout(startingSequence, 1000);
     started = true;
-
     });
 
 

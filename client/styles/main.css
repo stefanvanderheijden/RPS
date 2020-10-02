@@ -78,7 +78,7 @@ body {
 }
   
 #rightbottom {
-  width: 512px;
+ width: 512px;
   height: 256px;
   order: 4;
   flex-grow: 0;
@@ -199,6 +199,7 @@ body {
 }
 
 #cards-gadget-canvas {
+
   width: 512px;
   height: 256px;
   image-rendering: pixelated;

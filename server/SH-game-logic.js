@@ -159,7 +159,7 @@ class SHGame {
         return this._president;
     }
     _setChancellor(player){
-        this._setChancellor = player;
+        this._chancellor = player;
     }
     _getChancellor(){
         return this._chancellor;
@@ -310,6 +310,8 @@ class SHGame {
                         // set the president and chancellor to the previous candidates
                         this._setPresident(this._getPresidentCandidate());
                         this._setChancellor(this._getChancellorCandidate());
+
+                        console.log("the new chancellor is player: " + this._getChancellor());
 
                         // set the candidates to zero
                         this._nextPresidentCandidate();

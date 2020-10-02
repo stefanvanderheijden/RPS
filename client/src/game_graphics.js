@@ -254,16 +254,19 @@ function drawRole(seatnumber, role) {
         case "presidentCandidate":
             {
             GadgetCanvas.drawImage(presidentCandidateIMG, seat.x+20, seat.y+20);
+            console.log("drawing president candidate token");
             break;               
             }
         case "chancellor":
             {
             GadgetCanvas.drawImage(chancellorIMG, seat.x+20, seat.y+20);
+            console.log("drawing chancellor token");
             break;
             }
         case "chancellorCandidate":
             {
             GadgetCanvas.drawImage(chancellorCandidateIMG, seat.x+20, seat.y+20);
+            console.log("drawing chancellor candidate token");
             break;    
             }
         case null:
