@@ -145,7 +145,6 @@ io.on('connection', (sock) => {
     });
 
     sock.on('gameStarts', () => {
-        io.emit('message','Game starts');
         game = new SHGame(playerArray, leanPlayerArray);
         //set first president candidate
         game._setPresidentCandidate(playerArray[0]);
@@ -175,6 +174,12 @@ io.on('connection', (sock) => {
     sock.on('cardSelection',function(data) {
         if (typeof game != "undefined") {
             game._cardSelection(data.name,data.card);
+            }
+    });
+
+    sock.on('cardsFromPresident',function(cards) {
+        if (typeof game != "undefined") {
+            game._cardsToChancellor(cards);
             }
     });
 });

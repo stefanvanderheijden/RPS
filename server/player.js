@@ -6,7 +6,6 @@ class Player {
         this._seatnr = seatnr;
         this._socket = socket;
 
-
         this._sendToPlayer(name + ' takes seat ' + seatnr);
 
         // Game related class variables

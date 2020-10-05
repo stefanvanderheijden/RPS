@@ -22,6 +22,8 @@ Step 5: done
 Chancellor voting system, ja/nein voting system. Both made as callback functions depending on game state
 
 Step 6:
+The card that the president discards can be found at client.js line 233
+From there it should be sent to the server/game-logic
 Class representing the draw/discard decks, maintaining order
 
 Step 7:

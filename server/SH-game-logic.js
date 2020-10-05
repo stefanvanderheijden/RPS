@@ -9,15 +9,48 @@ class SHGame {
         this._players = players;
         this._hasBegun = true;
 
-        this._sendToPlayers('Secret hitler starts!');
+        this._sendToPlayers('----- Secret hitler starts! -----');
         
         // Dependent on number of players
-        this._numberOfPlayers = 7;
-        var rolesIds7p = ['Hitler' , 'Fascist' , 'Fascist', 'Liberal' , 'Liberal' , 'Liberal' , 'Liberal'];
+        this._numberOfPlayers = players.length;
+
+        var roles = [];
+        switch(this._numberOfPlayers) {
+            case 5:
+                roles = ['Hitler' , 'Fascist' , 'Liberal' , 'Liberal' , 'Liberal'];
+                this._hitlerMessage = "You are hitler, so you can not see the other fascist, but there is one out there!"
+                this._liberalMessage = "You are a liberal. Hitler is out there with one fascist buddy!"
+                break;
+            case 6:
+                roles = ['Hitler' , 'Fascist' ,'Liberal', 'Liberal', 'Liberal', 'Liberal'];
+                this._hitlerMessage = "You are hitler, so you can not see the other fascist, but there is one out there!"
+                this._liberalMessage = "You are a liberal. Hitler is out there with one fascist buddy!"
+                break;
+            case 7:
+                roles = ['Hitler' , 'Fascist' , 'Fascist' ,'Liberal', 'Liberal', 'Liberal', 'Liberal'];
+                this._hitlerMessage = "You are hitler, so you can not see the other fascists, but there are two out there!"
+                this._liberalMessage = "You are a liberal. Hitler is out there with two fascist buddies!"
+                break;
+            case 8:
+                roles = ['Hitler' , 'Fascist' , 'Fascist' ,'Liberal', 'Liberal', 'Liberal', 'Liberal', 'Liberal'];
+                this._hitlerMessage = "You are hitler, so you can not see the other fascists, but there are two out there!"
+                this._liberalMessage = "You are a liberal. Hitler is out there with two fascist buddies!"
+                break;
+            case 9:
+                roles = ['Hitler' , 'Fascist' , 'Fascist' , 'Fascist' , 'Liberal', 'Liberal', 'Liberal', 'Liberal', 'Liberal'];
+                this._hitlerMessage = "You are hitler, so you can not see the other fascists, but there are two three there!"
+                this._liberalMessage = "You are a liberal. Hitler is out there with three fascist buddies!"
+                break;
+            case 10:
+                roles = ['Hitler' , 'Fascist' , 'Fascist' , 'Fascist' , 'Liberal', 'Liberal', 'Liberal', 'Liberal', 'Liberal', 'Liberal'];
+                this._hitlerMessage = "You are hitler, so you can not see the other fascists, but there are two three there!"
+                this._liberalMessage = "You are a liberal. Hitler is out there with three fascist buddies!"
+                break;
+        }
 
         // Initialize game
         this._deck = null;
-        this._initializeGame(this._players, rolesIds7p)
+        this._initializeGame(this._players, roles)
         
 
         // The variables are filled with the player objects
@@ -67,10 +100,12 @@ class SHGame {
         this._janeinState = bool;
 
         if (bool == true) {
-            this._sendToPlayers("Sie musst Ja oder Nein stimmen");
+            // this._sendToPlayers("Sie musst Ja oder Nein stimmen");
+            this._sendToPlayers("You have to vote yes or no.");
         }
         else if (bool == false){
-            this._sendToPlayers("Sie konnte nicht mehr stimmen");
+            // this._sendToPlayers("Sie konnte nicht mehr stimmen");
+            this._sendToPlayers("You cannot vote anymore.");
         }
     }
 
@@ -260,7 +295,6 @@ class SHGame {
 
                 // Get voter player object
                 var voter = this._getPlayerByName(voter_name);
-                this._sendToPlayers(voter._getName());
                 // Get votee player object
                 var votee = this._getPlayerBySeatNr(vote_seatnr);
 
@@ -287,7 +321,6 @@ class SHGame {
                 this._addJaNeinToCount(voter_vote);
                 // Add vote to total vote count
                 this._addJaNeinToVotes();
-                voter._sendToPlayer("Your vote has been registriert")
                 // Change voter status to has voted
                 voter._setHasVoted(true);
                 // Store the vote
@@ -297,7 +330,6 @@ class SHGame {
                 // Vote results (check if total vote count reached the amount of players)
                 if (this._getJaNeinVotingCount() == this._getNumberOfPlayers()){
                 // if (this._getJaNeinVotingCount() == 3){
-                    
                     
                     if (this._getJaNeinCounter() > Math.floor(this._getNumberOfPlayers()/2)){
                         // if (this._getJaNeinCounter() > Math.floor(1.5) ){
@@ -311,7 +343,7 @@ class SHGame {
                         this._setPresident(this._getPresidentCandidate());
                         this._setChancellor(this._getChancellorCandidate());
 
-                        console.log("the new chancellor is player: " + this._getChancellor());
+                        console.log("The new chancellor is player: " + this._getChancellor());
 
                         // set the candidates to zero
                         this._nextPresidentCandidate();
@@ -335,11 +367,7 @@ class SHGame {
                         // Increase election tracker by one
                         this._addToElectionTracker();
                     }
-
-                    this._sendToPlayers("Voting has completed");
-
                     // Send votes to client
-
 
                     // Reset ja/nein counters (plural)
                     this._resetJaNeinCounters();
@@ -381,9 +409,12 @@ class SHGame {
             player._assignIdentity(roledict[randomNr]);
 
             // Print role to chat
-            player._sendToPlayer('Role: ' + roledict[randomNr])
-            player._sendToPlayer('Party: ' + player._getParty())
+            player._sendToPlayer('Your role: ' + roledict[randomNr])
+            player._sendToPlayer('Your party: ' + player._getParty())
             
+            if (player._getParty() == "Liberal") {
+                player._sendToPlayer(this._liberalMessage);
+            }
             // Store the fascists and create messages to announce them to co-players
             if ((roledict[randomNr]=='Fascist') || (roledict[randomNr]=='Hitler')){
                 fascists.push(player)
@@ -397,11 +428,15 @@ class SHGame {
         // Announce the ID's to the fascists
         fascists.forEach((fascist) => {
             // Check if the player is NOT hitler
-            if (fascist._getIdentity != 'Hitler'){
+            if (fascist._getIdentity() != 'Hitler'){
                 idmsgs.forEach((idmsg) => {
                     fascist._sendToPlayer(idmsg);
                 });
             }
+            else {
+                    fascist._sendToPlayer(this._hitlerMessage);
+            }
+            
         });
     }
 
@@ -420,6 +455,11 @@ class SHGame {
         this._getPresident()._sendCards(this._deck._drawThreeCards());
         // Set gamestate so that the card voting message is processed
         this._setPresidentCardSelectionState(true);
+    }
+
+    _cardsToChancellor(cards){
+        var chancellor = this._getChancellor();
+        chancellor._sendCards(cards);
     }
 }
 

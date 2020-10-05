@@ -2,7 +2,12 @@
 // Ik kreeg foutmeldingen totdat ik onderstaande regel commenteerde???
 //import { Socket } from "dgram";
 
+// const { strict } = require("assert");
+
 var person = ''
+var ownPlayer;
+var cardSelector = 0;
+var cardsInDeck = [];
 
 const writeEvent = (text) => {
     // <ul> element, defined in index.html. ul = unordered list
@@ -86,14 +91,13 @@ sock.on('message', writeEvent);
 sock.on('clientArrayUpdate', function(player) {
     //Arrays should only be updated for players who have already started earlier
     //Because new players get the full array anyway
-    if (started) {
-    
-    console.log('received the updated Array')
-    // add the player to the local player list
-    localplayerArray.push(player);
-    // draw the name of the newly added player on the canvas
-    drawName(player.name,player.seatnr);
-    drawEmotion(player.emotion, player.seatnr);
+    if (started) {   
+        console.log('received the updated Array')
+        // add the player to the local player list
+        localplayerArray.push(player);
+        // draw the name of the newly added player on the canvas
+        drawName(player.name,player.seatnr);
+        drawEmotion(player.emotion, player.seatnr);
     };
 })
 
@@ -132,9 +136,20 @@ sock.on('emotionUpdating', function(data) {
 });
 
 sock.on("rolesUpdate", function(leanPlayerArray) {
-    leanPlayerArray.forEach((player) => {
+    localplayerArray = leanPlayerArray;
+    localplayerArray.forEach((player) => {
         drawRole(player.seatnr,player.role);
+        // check the name of every player in the player array, if that name is this person, assign the object here
+        if (player.name == person) {
+            ownPlayer = player;
+        }
     });
+    if (ownPlayer.role == "president") {
+        writeEvent("You are the president.")
+    }
+    if (ownPlayer.role == "chancellor") {
+        writeEvent("You are the chancellor.")
+    }
 });
 
 sock.on("votesUpdate", function(votesArray) {
@@ -148,10 +163,15 @@ sock.on("votesUpdate", function(votesArray) {
 });
 
 sock.on("drawCards", function(cardsArray) {
+    cardsInDeck = cardsArray;
     drawCards(cardsArray);
+    if (ownPlayer.role == "president") {
+        writeEvent("Pick one card to discard. Then click pass cards.")
+    }
+    if (ownPlayer.role == "chancellor") {
+        writeEvent("Select one card to pass as law!")
+    }
 });
-
-    
 
 document
     .querySelector('#chat-form')
@@ -201,30 +221,88 @@ $("#cardsbutton").on("click", function(e) {
             sock.emit('gameStarts');
             gameStarted = true;
             drawButton(' ');
+            return;
+        }
+        
+    }
+
+    if (cardsInDeck.length > 0) {
+        // check if the player even has a player assigned to him
+        if (ownPlayer) {
+            if (ownPlayer.role == "president") { 
+                writeEvent("You discarded a " + cardsInDeck[cardSelector-1] + " card.")
+                cardsInDeck.splice(cardSelector-1,1);
+                sock.emit("cardsFromPresident",cardsInDeck);
+                writeEvent("You just gave a " + cardsInDeck[0] + " and a " + cardsInDeck[1] + " card to your chancellor.")
+                cardsInDeck = [];
+                drawCards(cardsInDeck);
+                //TODO Send the cards minus the selected card!
+            }
+            if (ownPlayer.role == "chancellor") { 
+                //TODO Send the selected card!
+            }
         }
     }
 
     // Actions when clicked on the button below the cards
     });
 
+function cardPress(cardNr) {
+    if (cardsInDeck.length > 0) {
+        console.log("card selected: " + cardNr);
+        var mssg = ""
+        
+        switch(cardNr) {
+            case 1:
+                mssg = "You have selected the first card to be discarded. The other two cards will be send to your chancellor once you click the button."
+                break;
+            case 2:
+                mssg = "You have selected the second card to be discarded. The other two cards will be send to your chancellor once you click the button."
+                break;
+            case 3:
+                mssg = "You have selected the third card to be discarded. The other two cards will be send to your chancellor once you click the button."
+                break;
+        }
+    }
+
+    // Check if the cards deck is not empty:
+    if (cardsInDeck.length > 0) {
+        if (ownPlayer.role == "president") {
+                drawSelectionBorder(cardNr,cardsInDeck);
+                drawButton('Pass cards');
+                writeEvent(mssg)
+                cardSelector = cardNr;
+                // TODO Draw a visual clue on the card that this has been selected
+            }
+        if (ownPlayer.role == "chancellor") {
+                // The 3rd card can not be visible, as the chancellor only gets two cards to choose from
+                if (cardNr != 3) {
+                    drawSelectionBorder(cardNr,cardsInDeck);
+                    drawButton('Enact law');
+                    writeEvent("You have selected a law to be enacted. Click the button to enact this law.")
+                    cardSelector = cardNr;
+                    // TODO Draw a visual clue on the card that this has been selected
+                }
+        }
+    }
+}
+
 $("#card1").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
-    // Actions when clicked on the FIRST CARD
-    msg = {name: person, card: 1};
-    sock.emit('cardSelection',msg);
+    cardPress(1);
     });
 
 $("#card2").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
-    // Actions when clicked on the SECOND CARD
+    cardPress(2);
     });
 
 $("#card3").on("click", function(e) {
     // Prevent the default link to be opened for the area in the HTML
     e.preventDefault();
-    // Actions when clicked on the THIRD CARD
+    cardPress(3);
     });
 
 $(document).ready(function() {

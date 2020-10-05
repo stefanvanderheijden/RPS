@@ -193,6 +193,30 @@ function drawCards(cards) {
         cardNo ++;
     });
 }
+function drawSelectionBorder(card,cards,message) {
+    //clear a rectangle on the canvas
+    CGadgetCanvas.clearRect(47,12,75,29);
+    //draw the cards that have been passed.
+    cardNo = 0;
+
+    cards.forEach((card) => {
+        cardLocation = CardLocations[cardNo];
+        if (card == "fascist") {
+            //draw a fascist card
+            CGadgetCanvas.drawImage(fasCard,cardLocation.x,cardLocation.y);
+
+        } else if (card == "liberal") {
+            //draw a liberal card
+            CGadgetCanvas.drawImage(libCard,cardLocation.x,cardLocation.y);
+        }
+        cardNo ++;
+    });
+
+    SCard = CardLocations[card-1];
+    CGadgetCanvas.beginPath();
+    CGadgetCanvas.rect(SCard.x-2,SCard.y-2,20,26);
+    CGadgetCanvas.stroke();
+}
 
 function drawButton(text) {
     // in the CTextCanvas all the coordinates have to be multiplied by 4
