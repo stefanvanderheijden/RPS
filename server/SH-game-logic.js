@@ -204,7 +204,6 @@ class SHGame {
     _getPlayerBySeatNr(seatNr) {
         var playertmp;  
         this._players.forEach((player) => {
-        
             // Check which player name coincides with player
             if (player._getSeatNr() == seatNr) {
                 playertmp=player;
@@ -217,7 +216,6 @@ class SHGame {
     _getPlayerByName(name) {
         var playertmp;  
         this._players.forEach((player) => {
-
             // Check which player name coincides with player
             if (player._getName() == name) {
                 playertmp=player;
@@ -228,7 +226,6 @@ class SHGame {
 
     _resetHasVoted() {
         // Reset hasVoted state for each player
-        
         this._players.forEach((player) => {
             player._setHasVoted(false);
         });
