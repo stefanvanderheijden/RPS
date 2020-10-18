@@ -248,38 +248,44 @@ $("#cardsbutton").on("click", function(e) {
     });
 
 function cardPress(cardNr) {
-    if (cardsInDeck.length > 0) {
-        console.log("card selected: " + cardNr);
-        var mssg = ""
-        
-        switch(cardNr) {
-            case 1:
-                mssg = "You have selected the first card to be discarded. The other two cards will be send to your chancellor once you click the button."
-                break;
-            case 2:
-                mssg = "You have selected the second card to be discarded. The other two cards will be send to your chancellor once you click the button."
-                break;
-            case 3:
-                mssg = "You have selected the third card to be discarded. The other two cards will be send to your chancellor once you click the button."
-                break;
-        }
-    }
-
     // Check if the cards deck is not empty:
     if (cardsInDeck.length > 0) {
         if (ownPlayer.role == "president") {
+                console.log("card selected: " + cardNr);
+                var msg = ""
+                
+                switch(cardNr) {
+                    case 1:
+                        msg = "You have selected the first card to be discarded. The other two cards will be send to your chancellor once you click the button."
+                        break;
+                    case 2:
+                        msg = "You have selected the second card to be discarded. The other two cards will be send to your chancellor once you click the button."
+                        break;
+                    case 3:
+                        msg = "You have selected the third card to be discarded. The other two cards will be send to your chancellor once you click the button."
+                        break;
+                }
                 drawSelectionBorder(cardNr,cardsInDeck);
                 drawButton('Pass cards');
-                writeEvent(mssg)
+                writeEvent(msg)
                 cardSelector = cardNr;
                 // TODO Draw a visual clue on the card that this has been selected
             }
         if (ownPlayer.role == "chancellor") {
                 // The 3rd card can not be visible, as the chancellor only gets two cards to choose from
                 if (cardNr != 3) {
+                    var msg = ""
+                    switch(cardNr) {
+                        case 1:
+                            msg = "You have selected the first card to be enacted. Click the button to enact the law."
+                            break;
+                        case 2:
+                            msg = "You have selected the second card to be enacted. Click the button to enact the law."
+                            break;
+                    }
                     drawSelectionBorder(cardNr,cardsInDeck);
                     drawButton('Enact law');
-                    writeEvent("You have selected a law to be enacted. Click the button to enact this law.")
+                    writeEvent(msg)
                     cardSelector = cardNr;
                     // TODO Draw a visual clue on the card that this has been selected
                 }

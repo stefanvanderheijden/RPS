@@ -63,6 +63,7 @@ class SHGame {
         this._lookingForChancellor = false;
         this._janeinState = false;
         this._presidentCardSelection = false;
+        this._chancellorCardSelection = false;
         
         // Vote counters
         this._jaNeinCounter = 0;
@@ -113,6 +114,14 @@ class SHGame {
         this._presidentCardSelection = bool;
         if (bool == true) {
             this._getPresident()._sendToPlayer("Discard one card");
+        }
+    }
+
+    _setChancellorCardSelectionState (bool) {
+        this._presidentCardSelection = false;
+        this._chancellorCardSelection = bool;
+        if (bool == true) {
+            this._getChancellor()._sendToPlayer("Choose one card");
         }
     }
 
@@ -457,6 +466,7 @@ class SHGame {
     _cardsToChancellor(cards){
         var chancellor = this._getChancellor();
         chancellor._sendCards(cards);
+        // Set 
     }
 }
 
