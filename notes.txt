@@ -29,3 +29,4 @@ Class representing the draw/discard decks, maintaining order
 Step 7:
 Create rounds WITHOUT special actions
 Create gamestate array containing roundnumber, vote count etc.
+Create gamestate object/class

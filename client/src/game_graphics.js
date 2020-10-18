@@ -223,6 +223,7 @@ function drawEmotion(emotionindex, seatnumber) {
     GadgetCanvas.drawImage(emotion, seat.x, seat.y)
 }
 
+// Draws the drawn cards into the three rectangles for law enactment
 function drawCards(cards) {
     //clear a rectangle on the canvas
     CGadgetCanvas.clearRect(47,12,75,29);

@@ -1,4 +1,3 @@
-
 // Ik kreeg foutmeldingen totdat ik onderstaande regel commenteerde???
 //import { Socket } from "dgram";
 
@@ -168,8 +167,6 @@ sock.on("votesUpdate", function(votesArray) {
     // clear the votes after 3 seconds
     setTimeout(clearVote, 3000);
 });
-
-
 
 // This function receives a type of law ('fascist' or 'liberal') and draws it on the board of the player.
 // Where the card is drawn is determined by the amount of laws that are already present.
@@ -361,7 +358,6 @@ $(document).ready(function() {
         sock.emit('playername',person);
         $( "#my_dialog").dialog( "close" );
         // END TEST FEATURE
-
     });
 });
 
