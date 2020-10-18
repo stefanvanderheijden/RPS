@@ -106,6 +106,10 @@ sock.on('getPlayerArray', function(playerarray) {
     console.log("received updated player array")
 });
 
+sock.on('startingTheGame', function() {
+    drawField(localplayerArray.length); 
+});
+
 // These things are done when the socket is initialized.
 sock.on("start", function(){
     // Wait for a second before drawing stuff, to give the images a chance to load

@@ -151,7 +151,7 @@ io.on('connection', (sock) => {
         game._startGameRound();
         gameStarted = true;
         SendFullPlayerArrayToAllPlayers();
-
+        io.emit('startingTheGame');
     })
 
     sock.on('janein', function(data) {
