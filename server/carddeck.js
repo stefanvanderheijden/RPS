@@ -80,7 +80,7 @@ class cardDeck {
 
     _discardCard(card) {
         this._discardPile.push(card);
-        // this._showDiscardPile();
+        this._showDiscardPile();
     }
 
     _showDiscardPile()

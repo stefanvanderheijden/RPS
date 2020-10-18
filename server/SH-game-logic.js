@@ -470,6 +470,7 @@ class SHGame {
     }
 
     _cardsToChancellor(cards){
+        this._setChancellorCardSelectionState(true);
         var chancellor = this._getChancellor();
         chancellor._sendCards(cards);
         // Set 
