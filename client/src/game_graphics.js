@@ -25,7 +25,11 @@ const CTextCanvas = HTMLCTextCanvas.getContext("2d")
 const HTMLCGadgetCanvas = document.getElementById("cards-gadget-canvas")
 const CGadgetCanvas = HTMLCGadgetCanvas.getContext("2d")
 
+var LibLaw = new Image();
+LibLaw.src = "src/IMG/LibLaw.png";
 
+var FasLaw = new Image();
+FasLaw.src = "src/IMG/FasLaw.png";
 
 TextCanvas.font = "0.6rem 'Press Start 2P'";
 TextCanvas.textAlign = "center";
@@ -42,10 +46,55 @@ class Createseat {
     }
 }
 
+class law {
+    constructor(x,y,type){
+        this.x = x*4;
+        this.y = y*4;
+        this.type = type;
+        this.visible = false;
+    }
+
+    draw() {
+        if (this.type == 'fascist') {
+            GadgetCanvas.drawImage(FasLaw,this.x,this.y);
+        } else {
+            GadgetCanvas.drawImage(LibLaw,this.x,this.y); 
+        }
+    }
+}
+
+var LibLaws = [
+    new law(63,64,'liberal'),
+    new law(75,64,'liberal'),
+    new law(87,64,'liberal'),
+    new law(99,64,'liberal'),
+    new law(111,64,'liberal')
+]
+
+var FasLaws = [
+    new law(57,90,'fascist'),
+    new law(69,90,'fascist'),
+    new law(81,90,'fascist'),
+    new law(93,90,'fascist'),
+    new law(105,90,'fascist'),
+    new law(117,90,'fascist')
+]
 
 //load background
 var background = new Image();
 background.src = "src/IMG/Room.png";
+
+//load background
+var field56 = new Image();
+field56.src = "src/IMG/Room_5_6.png";
+
+//load background
+var field78 = new Image();
+field78.src = "src/IMG/Room_7_8.png";
+
+//load background
+var field910 = new Image();
+field910.src = "src/IMG/Room_9_10.png";
 
 //load border
 var border = new Image();
@@ -306,6 +355,25 @@ function drawCNH(seatnumber) {
     GadgetCanvas.drawImage(CNHIMG, seat.x+2, seat.y+21);
 }
 
+function drawField(numberOfPlayers) {
+    if (numberOfPlayers == 5 || numberOfPlayers == 6) {
+        BGCanvas.drawImage(field56, 0, 0);
+    }
+    if (numberOfPlayers == 7 || numberOfPlayers == 8) {
+        BGCanvas.drawImage(field78, 0, 0);
+    }
+    if (numberOfPlayers == 9 || numberOfPlayers == 10) {
+        BGCanvas.drawImage(field910, 0, 0);
+    }
+}
+
+function drawLaw(type,index) {
+    if (type == 'liberal') {
+        LibLaws[index].draw();
+    } else if (type == 'fascist') {
+        FasLaws[index].draw();
+    }
+}
 
 window.onload = function() {
     //Draw the background image
@@ -313,10 +381,4 @@ window.onload = function() {
     // Drawing the words on the YES and NO button on the cards area (bottom right)
     CTextCanvas.fillText("JAWOHL", 96, 96);
     CTextCanvas.fillText("NEIN", 96, 174);
-
 }
-
-
-
-
-
