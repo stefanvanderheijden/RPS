@@ -7,7 +7,7 @@
 var person = ''
 var ownPlayer;
 var cardSelector = 0;
-var cardsInDeck = [];
+var cardsFromPile = [];
 
 const writeEvent = (text) => {
     // <ul> element, defined in index.html. ul = unordered list
@@ -163,7 +163,7 @@ sock.on("votesUpdate", function(votesArray) {
 });
 
 sock.on("drawCards", function(cardsArray) {
-    cardsInDeck = cardsArray;
+    cardsFromPile = cardsArray;
     drawCards(cardsArray);
     if (ownPlayer.role == "president") {
         writeEvent("Pick one card to discard. Then click pass cards.")
@@ -226,16 +226,16 @@ $("#cardsbutton").on("click", function(e) {
         
     }
 
-    if (cardsInDeck.length > 0) {
+    if (cardsFromPile.length > 0) {
         // check if the player even has a player assigned to him
         if (ownPlayer) {
             if (ownPlayer.role == "president") { 
-                writeEvent("You discarded a " + cardsInDeck[cardSelector-1] + " card.")
-                cardsInDeck.splice(cardSelector-1,1);
-                sock.emit("cardsFromPresident",cardsInDeck);
-                writeEvent("You just gave a " + cardsInDeck[0] + " and a " + cardsInDeck[1] + " card to your chancellor.")
-                cardsInDeck = [];
-                drawCards(cardsInDeck);
+                writeEvent("You discarded a " + cardsFromPile[cardSelector-1] + " card.")
+                cardsFromPile.splice(cardSelector-1,1);
+                sock.emit("cardsFromPresident",cardsFromPile);
+                writeEvent("You just gave a " + cardsFromPile[0] + " and a " + cardsFromPile[1] + " card to your chancellor.")
+                cardsFromPile = [];
+                drawCards(cardsFromPile);
                 //TODO Send the cards minus the selected card!
             }
             if (ownPlayer.role == "chancellor") { 
@@ -249,7 +249,7 @@ $("#cardsbutton").on("click", function(e) {
 
 function cardPress(cardNr) {
     // Check if the cards deck is not empty:
-    if (cardsInDeck.length > 0) {
+    if (cardsFromPile.length > 0) {
         if (ownPlayer.role == "president") {
                 console.log("card selected: " + cardNr);
                 var msg = ""
@@ -265,7 +265,7 @@ function cardPress(cardNr) {
                         msg = "You have selected the third card to be discarded. The other two cards will be send to your chancellor once you click the button."
                         break;
                 }
-                drawSelectionBorder(cardNr,cardsInDeck);
+                drawSelectionBorder(cardNr,cardsFromPile);
                 drawButton('Pass cards');
                 writeEvent(msg)
                 cardSelector = cardNr;
@@ -283,7 +283,7 @@ function cardPress(cardNr) {
                             msg = "You have selected the second card to be enacted. Click the button to enact the law."
                             break;
                     }
-                    drawSelectionBorder(cardNr,cardsInDeck);
+                    drawSelectionBorder(cardNr,cardsFromPile);
                     drawButton('Enact law');
                     writeEvent(msg)
                     cardSelector = cardNr;
