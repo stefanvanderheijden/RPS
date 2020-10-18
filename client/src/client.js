@@ -231,15 +231,25 @@ $("#cardsbutton").on("click", function(e) {
         if (ownPlayer) {
             if (ownPlayer.role == "president") { 
                 writeEvent("You discarded a " + cardsFromPile[cardSelector-1] + " card.")
+                // Add the discarded pile to the discard pile
+                sock.emit("addToDiscardPile",cardsFromPile[cardSelector-1])
+                // Remove the discarded card from hand
                 cardsFromPile.splice(cardSelector-1,1);
+                // Send hand to server (and to chancellor)
                 sock.emit("cardsFromPresident",cardsFromPile);
                 writeEvent("You just gave a " + cardsFromPile[0] + " and a " + cardsFromPile[1] + " card to your chancellor.")
-                cardsFromPile = [];
-                drawCards(cardsFromPile);
-                //TODO Send the cards minus the selected card!
+                // Remove card drawings from player board
+                drawCards([]);
             }
             if (ownPlayer.role == "chancellor") { 
                 //TODO Send the selected card!
+                writeEvent("You enacted a " + cardsFromPile[cardSelector-1] + "law.");
+                // Add other card to discard pile
+                sock.emit("addToDiscardPile", cardsFromPile.splice(cardSelector-1,1));
+                // Send enacted law to server
+                sock.emit("enactLaw", cardsFromPile[cardSelector-1]);
+                // Remove card drawings from player board
+                drawCards([]);
             }
         }
     }
