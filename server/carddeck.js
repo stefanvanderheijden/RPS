@@ -1,7 +1,7 @@
 class cardDeck {
     constructor(){
         //Create an empty deck
-        this._deck = [];
+        this._drawPile = [];
        
         //Determine nr of type of cards
         this._nrLibCards = 6;
@@ -14,7 +14,7 @@ class cardDeck {
         //Fill the deck with the cards
         this._createDeck(this._nrLibCards,this._nrFasCards);
 
-        this._discardDeck = []; 
+        this._discardPile = []; 
     }
 
     _shuffleCards() {
@@ -22,12 +22,12 @@ class cardDeck {
             // switch the values of two random cards
             for (var i = 0; i < 1000; i++)
             {
-                var location1 = Math.floor((Math.random() * this._deck.length));
-                var location2 = Math.floor((Math.random() * this._deck.length));
-                var tmp = this._deck[location1];
+                var location1 = Math.floor((Math.random() * this._drawPile.length));
+                var location2 = Math.floor((Math.random() * this._drawPile.length));
+                var tmp = this._drawPile[location1];
 
-                this._deck[location1] = this._deck[location2];
-                this._deck[location2] = tmp;
+                this._drawPile[location1] = this._drawPile[location2];
+                this._drawPile[location2] = tmp;
             }
         }
 
@@ -43,29 +43,29 @@ class cardDeck {
             tempdeck.push(this._FCard);
             } 
         
-        this._deck = tempdeck;
+        this._drawPile = tempdeck;
 
         this._shuffleCards(); 
         }
 
     _checkEmptyDeck() {
-        if (this._deck.length == 0) {
+        if (this._drawPile.length == 0) {
             //add the discardsDeck to the deck
-            this._deck = this._discardDeck;
+            this._drawPile = this._discardPile;
             //shuffle the deck
             this._shuffleCards();
             //empty the discard deck
-            this._discardDeck = [];
+            this._discardPile = [];
         }
     }
 
     _drawThreeCards() {
         this._checkEmptyDeck();
-        var card1 = this._deck.pop();
+        var card1 = this._drawPile.pop();
         this._checkEmptyDeck();
-        var card2 = this._deck.pop();
+        var card2 = this._drawPile.pop();
         this._checkEmptyDeck();
-        var card3 = this._deck.pop();
+        var card3 = this._drawPile.pop();
         
         var cards = [card1,card2,card3];
 
@@ -74,12 +74,21 @@ class cardDeck {
 
     _drawOneCard() {
         this._checkEmptyDeck();
-        var card = this._deck.pop();
+        var card = this._drawPile.pop();
         return card;
     }
 
     _discardCard(card) {
-        this._discardDeck.push(card);
+        this._discardPile.push(card);
+        // this._showDiscardPile();
+    }
+
+    _showDiscardPile()
+    {
+        this._discardPile.forEach((card)=> {
+            
+            console.log(card);
+        });
     }
 }
 

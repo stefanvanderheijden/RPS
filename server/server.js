@@ -182,6 +182,19 @@ io.on('connection', (sock) => {
             game._cardsToChancellor(cards);
             }
     });
+
+    sock.on("addToDiscardPile",function(card) {
+        if (typeof game != "undefined") {
+            game._getDeck()._discardCard(card)
+            }
+    });
+
+    sock.on("enactLaw",function(card) {
+        if (typeof game != "undefined") {
+            io.emit("newLaw",card);
+            }
+    });
+    
 });
 
 // Output error message if server crashes

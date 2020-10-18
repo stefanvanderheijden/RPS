@@ -243,9 +243,10 @@ $("#cardsbutton").on("click", function(e) {
             }
             if (ownPlayer.role == "chancellor") { 
                 //TODO Send the selected card!
-                writeEvent("You enacted a " + cardsFromPile[cardSelector-1] + "law.");
+                writeEvent("You enacted a " + cardsFromPile[cardSelector-1] + " law.");
                 // Add other card to discard pile
-                sock.emit("addToDiscardPile", cardsFromPile.splice(cardSelector-1,1));
+                cardsFromPile.splice(cardSelector-1,1);
+                sock.emit("addToDiscardPile", cardsFromPile[0]);
                 // Send enacted law to server
                 sock.emit("enactLaw", cardsFromPile[cardSelector-1]);
                 // Remove card drawings from player board
