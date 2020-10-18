@@ -6,14 +6,10 @@ body {
     font-size: 0.5rem;
     margin-left: auto;
     margin-right: auto;
-
-
   }
 
 #logo {
   margin-top: 20px;
-
-
 }
 
 #logoimg {
@@ -29,7 +25,6 @@ body {
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-
   }
 
 #stage{
@@ -43,7 +38,6 @@ body {
   order: 1;
   flex-grow: 0;
   flex-shrink: 0;
-
   }
 
 #rightbar {
@@ -55,12 +49,9 @@ body {
   order: 2;
   height: 672px;
   width: 512px;
-
   flex-grow: 0;
   flex-shrink: 0;
   flex-wrap: wrap;  
-
-
   }
 
 #righttop {
@@ -70,9 +61,6 @@ body {
   order: 1;
   flex-grow: 0;
   flex-shrink: 0;
-
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
 }
@@ -84,9 +72,6 @@ body {
   flex-grow: 0;
   flex-shrink: 0;
   margin-top: 50px;
-
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
 }
@@ -95,8 +80,6 @@ body {
   flex-grow: 0;
   flex-shrink: 0;
   position: absolute;
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
   width: 736px;
@@ -107,8 +90,6 @@ body {
 
 #char-canvas {
   position: absolute;
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
   width: 736px;
@@ -120,8 +101,6 @@ body {
 
 #gadget-canvas {
   position: absolute;
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
   width: 736px;
@@ -131,8 +110,6 @@ body {
   }
 #text-canvas {
   position: absolute;
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
   position: absolute; left: 0; top: 0; z-index: 3;
@@ -140,8 +117,6 @@ body {
 
 #clickimage {
   position: absolute;
-  /* margin-left: auto;
-  margin-right: auto; */
   left: 0;
   right: 0;
   position: absolute; left: 0; top: 0; z-index: 10;
@@ -155,7 +130,6 @@ body {
   margin-right: auto;
   image-rendering: pixelated;
   z-index: -1;
-
 }
 
 #events {
@@ -220,9 +194,7 @@ body {
   left: 0;
   right: 0;
   image-rendering: pixelated;
-
   z-index: 10;
-
   }
 
 
@@ -333,9 +305,6 @@ button:hover {
     border-color: blue;
   }
   
-
-
-  /* The container <div> - needed to position the dropdown content */
   .dropdown {
 
     margin-left: 30px;
