@@ -8,6 +8,8 @@ var person = ''
 var ownPlayer;
 var cardSelector = 0;
 var cardsInDeck = [];
+var fasLawsCount = 0;
+var libLawsCount = 0;
 
 const writeEvent = (text) => {
     // <ul> element, defined in index.html. ul = unordered list
@@ -17,7 +19,6 @@ const writeEvent = (text) => {
     el.innerHTML = text;
     parent.appendChild(el);
     parent.scrollTop = parent.scrollHeight;
-
 };
 
 // Create socket 
@@ -156,6 +157,9 @@ sock.on("rolesUpdate", function(leanPlayerArray) {
     }
 });
 
+// This function reveives an array of votes, with [seat,vote]
+// This function draws all the votes of the players for three seconds.
+// The votes are displayed by a graphical hand with a red or green card.
 sock.on("votesUpdate", function(votesArray) {
     // Draw the votes
     votesArray.forEach((vote) => {
@@ -163,7 +167,23 @@ sock.on("votesUpdate", function(votesArray) {
     });
     // clear the votes after 3 seconds
     setTimeout(clearVote, 3000);
-    
+});
+
+
+
+// This function receives a type of law ('fascist' or 'liberal') and draws it on the board of the player.
+// Where the card is drawn is determined by the amount of laws that are already present.
+// The player keeps track of this counter locally.
+sock.on("newLaw", function(type) {
+    if (type == 'fascist') {
+        // draw a new fascist law
+        fasLawsCount ++;
+        drawLaw(type, (fasLawsCount - 1 ));
+    } else if (type == 'liberal') {
+        // draw a new liberal law
+        libLawsCount ++;
+        drawLaw(type, (libLawsCount - 1 ));
+    }
 });
 
 sock.on("drawCards", function(cardsArray) {
@@ -318,6 +338,11 @@ $("#card3").on("click", function(e) {
 $(document).ready(function() {
     $(function() {
         var pos = { my: "center center", at: "center top+350", of: window };
+        
+        // TEST FEATURE: DELETE BEFORE LAUNCH
+        $("#t1").val(Math.round(Math.random(1)*100000));
+        // END TEST FEATURE
+
         $( "#my_dialog" ).dialog({
             modal: true,
             autoOpen: true,
@@ -325,14 +350,20 @@ $(document).ready(function() {
             buttons: {
                  "+  Join game  +": function(){
                     person = $("#t1").val();
-                    //var person = "jaapie"
-                    sock.emit('playername',person)
+                    sock.emit('playername',person);
                     $( this ).dialog( "close" );
                  }
                }
+        });
+
+        // TEST FEATURE: DELETE BEFORE LAUNCH
+        person = $("#t1").val();
+        sock.emit('playername',person);
+        $( "#my_dialog").dialog( "close" );
+        // END TEST FEATURE
+
     });
-    });
-    })
+});
 
 $('#my_dialog').keypress(function(e) {
     if (e.keyCode == $.ui.keyCode.ENTER) {

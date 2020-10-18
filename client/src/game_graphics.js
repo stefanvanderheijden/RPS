@@ -40,16 +40,16 @@ CTextCanvas.textAlign = "center";
 
 class Createseat {
     constructor(x, y) {
-        this.x = x*4;
-        this.y = y*4;
+        this.x = x;
+        this.y = y;
         this.name = " ";
     }
 }
 
 class law {
     constructor(x,y,type){
-        this.x = x;
-        this.y = y;
+        this.x = x*4;
+        this.y = y*4;
         this.type = type;
         this.visible = false;
     }
@@ -67,7 +67,17 @@ var LibLaws = [
     new law(63,64,'liberal'),
     new law(75,64,'liberal'),
     new law(87,64,'liberal'),
+    new law(99,64,'liberal'),
     new law(111,64,'liberal')
+]
+
+var FasLaws = [
+    new law(57,90,'fascist'),
+    new law(69,90,'fascist'),
+    new law(81,90,'fascist'),
+    new law(93,90,'fascist'),
+    new law(105,90,'fascist'),
+    new law(117,90,'fascist')
 ]
 
 //load background
@@ -356,6 +366,13 @@ function drawField(numberOfPlayers) {
     }
 }
 
+function drawLaw(type,index) {
+    if (type == 'liberal') {
+        LibLaws[index].draw();
+    } else if (type == 'fascist') {
+        FasLaws[index].draw();
+    }
+}
 
 window.onload = function() {
     //Draw the background image
@@ -364,7 +381,3 @@ window.onload = function() {
     CTextCanvas.fillText("JAWOHL", 96, 96);
     CTextCanvas.fillText("NEIN", 96, 174);
 }
-
-
-
-
